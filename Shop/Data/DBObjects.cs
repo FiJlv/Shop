@@ -23,7 +23,7 @@ namespace Shop.Data
                      {
                          name = "Tesla",
                          shortDesc = "Быстрый автомобиль",
-                         longDesc = "Красивый, быстрый, тихий, надежный!!! ПОКУПАЙТЕ!!!",
+                         longDesc = "Красивый, быстрый, тихий, надежный",
                          img = "/img/1.jpg",
                          price = 45000,
                          isFavourite = true,
@@ -34,7 +34,7 @@ namespace Shop.Data
                      {
                          name = "Tesla S",
                          shortDesc = "Быстрый и компактный автомобиль",
-                         longDesc = "Красивый, быстрый, тихий, надежный и небольшой!!! ПОКУПАЙТЕ!!!",
+                         longDesc = "Красивый, быстрый, тихий, надежный и небольшой",
                          img = "/img/2.jpg",
                          price = 43000,
                          isFavourite = false,
@@ -45,7 +45,7 @@ namespace Shop.Data
                       {
                           name = "Таврия",
                           shortDesc = "Супер машина",
-                          longDesc = "Не нуждается в представлении, берите, не пожалеете!",
+                          longDesc = "Не нуждается в представлении",
                           img = "/img/3.jpg",
                           price = 1000,
                           isFavourite = true,
@@ -55,8 +55,8 @@ namespace Shop.Data
                        new Car
                        {
                            name = "Таврия Славута",
-                           shortDesc = "Норм машинка",
-                           longDesc = "Как и стандартная Таврия, не нуждается в представлении, берите, не пожалеете!",
+                           shortDesc = "Супер машина",
+                           longDesc = "Не нуждается в представлении",
                            img = "/img/4.jpg",
                            price = 1100,
                            isFavourite = false,
