@@ -17,7 +17,7 @@ namespace Shop.Data.Models
             this.appDBContent = appDBContent;
         }
         public string ShopCartId { get; set; }
-        public List<ShopCarItem> listShopItems { get; set; }        
+        public List<ShopCarItem> ListShopItems { get; set; }        
 
         public static ShopCart GetCart(IServiceProvider services)
         {
@@ -32,16 +32,16 @@ namespace Shop.Data.Models
         {
             appDBContent.ShopCarItem.Add(new ShopCarItem {
                 ShopCartId = ShopCartId,
-                car = car,
-                price = car.price
+                Car = car,
+                Price = car.Price
             });
 
             appDBContent.SaveChanges();
         }
 
-        public List<ShopCarItem> getShopItems()
+        public List<ShopCarItem> GetShopItems()
         {
-            return appDBContent.ShopCarItem.Where(c => c.ShopCartId == ShopCartId).Include(s => s.car).ToList();
+            return appDBContent.ShopCarItem.Where(c => c.ShopCartId == ShopCartId).Include(s => s.Car).ToList();
         }
     }
 }

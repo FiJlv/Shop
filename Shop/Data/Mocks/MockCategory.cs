@@ -15,11 +15,10 @@ namespace Shop.Data.Mocks
             {
                 return new List<Category>
                 {
-                    new Category {categoryName = "Электроавтомобили", desc = "Современный вид транспорта"},
-                    new Category {categoryName = "Классические автомобили", desc = "Машины с двигателем внутреннего згорания"} 
+                    new Category {CategoryName = "Electric cars", Desc = "A modern and economical mode of transportation"},
+                    new Category {CategoryName = "Gasoline cars", Desc = "Internal combustion engine vehicles"} 
                 };
-            }
-        
+            }      
         }
     }
 }

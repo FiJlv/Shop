@@ -29,19 +29,19 @@ namespace Shop.Controllers
             string currCategory = "";
             if (string.IsNullOrEmpty(category))
             {
-                cars = _allCars.Cars.OrderBy(i => i.id);
+                cars = _allCars.Cars.OrderBy(i => i.Id);
             }
             else
             {
                 if (string.Equals("electro", category, StringComparison.OrdinalIgnoreCase))
                 {
-                    cars = _allCars.Cars.Where(i => i.Category.categoryName.Equals("Электроавтомобили")).OrderBy(i => i.id);
-                    currCategory = "Электроавтомобили";
+                    cars = _allCars.Cars.Where(i => i.Category.CategoryName.Equals("Electric cars")).OrderBy(i => i.Id);
+                    currCategory = "Electric cars";
                 }
                 else if (string.Equals("fuel", category, StringComparison.OrdinalIgnoreCase))
                 {
-                    cars = _allCars.Cars.Where(i => i.Category.categoryName.Equals("Классические автомобили")).OrderBy(i => i.id);
-                    currCategory = "Классические автомобили";
+                    cars = _allCars.Cars.Where(i => i.Category.CategoryName.Equals("Gasoline cars")).OrderBy(i => i.Id);
+                    currCategory = "Gasoline cars";
                 };
 
                 
@@ -49,12 +49,12 @@ namespace Shop.Controllers
 
             var carObj = new CarsListViewModel
             {
-                allCars = cars,
-                currCategory = currCategory
+                AllCars = cars,
+                CurrCategory = currCategory
 
             };
 
-            ViewBag.Title = "Страница с автомобилями";
+            ViewBag.Title = "Page with cars";
 
             return View(carObj);
         }

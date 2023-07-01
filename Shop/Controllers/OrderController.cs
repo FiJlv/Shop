@@ -25,16 +25,16 @@ namespace Shop.Controllers
         [HttpPost]
         public IActionResult Checkout(Order order)
         {
-            shopCart.listShopItems = shopCart.getShopItems();      
+            shopCart.ListShopItems = shopCart.GetShopItems();      
 
-            if(shopCart.listShopItems.Count == 0)
+            if(shopCart.ListShopItems.Count == 0)
             {
-                ModelState.AddModelError("", "У вас должны быть товары");
+                ModelState.AddModelError("", "You must have goods");
             }
 
             if (ModelState.IsValid)
             {
-                allOrders.createOrder(order);
+                allOrders.CreateOrder(order);
                 return RedirectToAction("Complete");
             }
 
@@ -43,7 +43,7 @@ namespace Shop.Controllers
 
         public IActionResult Complete()
         {
-            ViewBag.Message = "Заказ успешно обработан";
+            ViewBag.Message = "Order successfully processed";
             return View(); 
         }
     }

@@ -1,43 +1,53 @@
 ﻿@model Order 
 
 <div class="row">
-    <h3>Оформление заказа</h3>
+
+    <h3>Ordering</h3>
+
     <form asp-action="Checkout" method="post" class="form-horizontal">
+
         <div class="form-group">
-            <label asp-for="name"></label>
+            <label asp-for="Name"></label>
             <div class="col-md-5">
-                <input asp-for="name" class="form-control" />
-                <span asp-validation-for="name" class="text-danger"></span>
+                <span asp-validation-for="Name" class="text-danger"></span>
+                <input asp-for="Name" class="form-control" />
             </div>
         </div>
+
         <div class="form-group">
-            <label asp-for="surname"></label>
+            <label asp-for="Surname"></label>
             <div class="col-md-5">
-                <input asp-for="surname" class="form-control" />
-                <span asp-validation-for="surname" class="text-danger"></span>
+                <span asp-validation-for="Surname" class="text-danger"></span>
+                <input asp-for="Surname" class="form-control" />
             </div>
         </div>
+
         <div class="form-group">
-            <label asp-for="adress"></label>
+            <label asp-for="Address"></label>
             <div class="col-md-5">
-                <input asp-for="adress" class="form-control" />
-                <span asp-validation-for="adress" class="text-danger"></span>
+                <span asp-validation-for="Address" class="text-danger"></span>
+                <input asp-for="Address" class="form-control" />
             </div>
         </div>
+
         <div class="form-group">
-            <label asp-for="phone"></label>
+            <label asp-for="Phone"></label>
             <div class="col-md-5">
-                <input asp-for="phone" class="form-control" />
-                <span asp-validation-for="phone" class="text-danger"></span>
+                <span asp-validation-for="Phone" class="text-danger"></span>
+                <input asp-for="Phone" class="form-control" />
             </div>
         </div>
+
         <div class="form-group">
-            <label asp-for="email"></label>
+            <label asp-for="Email"></label>
             <div class="col-md-5">
-                <input asp-for="email" class="form-control" />
-                <span asp-validation-for="email" class="text-danger"></span>
+                <span asp-validation-for="Email" class="text-danger"></span>
+                <input asp-for="Email" class="form-control" />
             </div>
         </div>
-        <input class ="btn btn-success" type="submit" value="Завершить заказ" />
+        <hr />
+        <input class="btn btn-success" type="submit" value="Complete order" />
+
     </form>
+
 </div> 

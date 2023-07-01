@@ -10,39 +10,40 @@ namespace Shop.Data.Models
     public class Order
     {
         [BindNever]
-        public int id { get; set; }
+        public int Id { get; set; }
 
-        [Display(Name = "Введите имя")]
-        [StringLength(25)]
-        [Required(ErrorMessage ="Длинна имени не менее 5-и символов")]
-
-        public string name { get; set; }
-        [Display(Name = "Введите фамилию")]
+        [Display(Name = "Enter name")]
         [StringLength(30)]
-        [Required(ErrorMessage = "Длинна фамилии не менее 5-и символов")]
+        [Required(ErrorMessage = "The name must be at least 5 characters long")]
+        public string Name { get; set; }
 
-        public string surname { get; set; }
-        [Display(Name = "Введите адрес")]
+        [Display(Name = "Enter surname")]
         [StringLength(30)]
-        [Required(ErrorMessage = "Длинна адреса не менее 10-и символов")]
+        [Required(ErrorMessage = "The surname must be at least 5 characters long")]
 
-        public string adress { get; set; }
-        [Display(Name = "Введите номер телефона")]
+        public string Surname { get; set; }
+
+        [Display(Name = "Enter address")]
         [StringLength(30)]
-        [DataType(DataType.PhoneNumber)]
-        [Required(ErrorMessage = "Длинна номер не менее 10-и символов")]
+        [Required(ErrorMessage = "The address must be at least 10 characters long")]
+        public string Address { get; set; }
 
-        public string phone { get; set; }
-        [Display(Name = "Введите email")]
+        [Display(Name = "Enter email")]
         [DataType(DataType.EmailAddress)]
         [StringLength(20)]
-        [Required(ErrorMessage = "Длинна email не менее 5-и символов")]
+        [Required(ErrorMessage = "The email must be at least 5 characters long")]
+        public string Email { get; set; }
 
-        public string email { get; set; }
+        [Display(Name = "Enter phone number")]
+        [StringLength(30)]
+        [DataType(DataType.PhoneNumber)]
+        [Required(ErrorMessage = "The phone number must be at least 10 characters long")]
+        public string Phone { get; set; }
+
         [BindNever]
         [ScaffoldColumn(false)]
-        public DateTime orderTime { get; set; }
-        public List<OrderDetail> orderDetails { get; set; }
+        public DateTime OrderTime { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
 
     }
 }

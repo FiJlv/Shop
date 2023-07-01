@@ -20,7 +20,7 @@ namespace Shop.Controllers
         {
             var homeCars = new HomeViewModel
             {
-                favCars = _carRep.getFavCars
+                FavCars = _carRep.GetFavCars
             };
             return View(homeCars);
         }

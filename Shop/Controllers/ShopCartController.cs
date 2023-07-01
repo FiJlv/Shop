@@ -22,20 +22,20 @@ namespace Shop.Controllers
 
         public ViewResult Index()
         {
-            var items = _shopCart.getShopItems();
-            _shopCart.listShopItems = items;
+            var items = _shopCart.GetShopItems();
+            _shopCart.ListShopItems = items;
 
             var obj = new ShopCartViewModel
             {
-                shopCart = _shopCart
+                ShopCart = _shopCart
             };
 
             return View(obj);
         }
 
-        public RedirectToActionResult addToCart(int id)
+        public RedirectToActionResult AddToCart(int id)
         {
-            var item = _carRep.Cars.FirstOrDefault(i => i.id == id); 
+            var item = _carRep.Cars.FirstOrDefault(i => i.Id == id); 
             if(item != null)
             {
                 _shopCart.AddToCart(item);

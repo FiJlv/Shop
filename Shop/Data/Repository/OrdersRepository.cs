@@ -11,26 +11,28 @@ namespace Shop.Data.Repository
     {
         private readonly AppDBContent appDBContent;
         private readonly ShopCart shopCart;
+
         public OrdersRepository(AppDBContent appDBContent, ShopCart shopCart)
         {
             this.appDBContent = appDBContent;
             this.shopCart = shopCart;
         }
-       public void createOrder(Order order)
+
+       public void CreateOrder(Order order)
        {
-            order.orderTime = DateTime.Now;
+            order.OrderTime = DateTime.Now;
             appDBContent.Order.Add(order);
             appDBContent.SaveChanges();
 
-            var items = shopCart.listShopItems; 
+            var items = shopCart.ListShopItems; 
 
             foreach(var el in items)
             {
                 var orderDetail = new OrderDetail()
                 {
-                    CarID = el.car.id,
-                    orderID = order.id,
-                    price = el.car.price
+                    CarID = el.Car.Id,
+                    OrderID = order.Id,
+                    Price = el.Car.Price
                 };
      
             }

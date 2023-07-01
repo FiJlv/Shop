@@ -7,10 +7,9 @@ namespace Shop.Data.Models
 {
     public class Category
     {
-        public int id { get; set; }
-        public string categoryName { get; set; }
-        public string desc { get; set; }
-        public List<Car> cars { get; set; }
-
+        public int Id { get; set; }
+        public string CategoryName { get; set; }
+        public string Desc { get; set; }
+        public List<Car> Cars { get; set; }
     }
 }
