@@ -43,8 +43,6 @@ namespace Shop.Controllers
                     cars = _allCars.Cars.Where(i => i.Category.CategoryName.Equals("Gasoline cars")).OrderBy(i => i.Id);
                     currCategory = "Gasoline cars";
                 };
-
-                
             }
 
             var carObj = new CarsListViewModel

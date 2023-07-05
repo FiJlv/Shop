@@ -2,54 +2,100 @@
 
 <html>
 <head>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+
     <title>@ViewBag.Title</title>
+
     <link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/script.js"></script>
+
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">AutoPro</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Main</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Cars/List">Cars</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Cars/List/electro">Electric</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Cars/List/fuel">Fuel</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/ShopCart/">Cart</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+    <div class="wrapper">
+
+    <div class="content">
+
+        <header class="header">
+            <div class='container'>
+                <div class="header__body">
+                    <a href="/Cars/List" class="header__logo">
+                            <img src="/img/logo.png" alt="">
+                    </a>
+                    <div class="header__burger">
+                        <span></span>
+                    </div>
+                    <nav class="header__menu">
+                        <ul class="header__list">
+                            <li>
+                                <a href="/Cars/List" class="header__link">
+                                    Main
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Cars/List/electro" class="header__link">
+                                    Electric
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Cars/List/fuel" class="header__link">
+                                    Fuel
+                                </a>
+                            </li>
+                            <li>
+                                <a href=/ShopCart/ class="header__link">
+                                    Cart
+                                </a>
+                            </li>
+                             <li>
+                                <a href=# class="header__link">
+                                    Sign In
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://t.me/vldfltv" class="telimg">
+                                    <img src="/img/tel.png" width="20" height="20" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Home/" class="telimg">
+                                    <img src="/img/fav.png" width="20" height="20" alt="">
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class ="container mt-5">
-        @RenderBody()
-    </div>
-    <footer class="footer">
-        <div class="container">
-            <p class="float-end"><a href="#">Back to top</a></p>
-            <p>© 2023 All rights reserved.</p>
+        </header>
+
+        <div class="site-description">
+            <div class='container'>
+                <h2>Car Sales</h2>
+                <p>We offer you the opportunity to purchase previously leased vehicles. These vehicles were purchased new from authorized dealers, and our company is their first and sole owner. They were previously assigned to managers of companies for which we formed vehicle fleets, with their own corporate driving safety standards. These vehicles are regularly serviced at certified service centers and have a transparent technical and insurance history with all the necessary documents. VAT is included in the price for corporate buyers. You can see the available vehicles of various brands, models, and classes on this website.</p>
+            </div>
         </div>
-    </footer>
+
+        <div id="wrapper__articles">
+            <div class='container'>
+                <div id="articles">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+        <footer class="footer">
+            <div class="container">
+                <p class="float-end"><a href="#">Back to top</a></p>
+                <p>© 2023 All rights reserved.</p>
+            </div>
+        </footer>
+
+    </div>
+
 </body>
 </html>
