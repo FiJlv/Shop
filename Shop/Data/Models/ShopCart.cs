@@ -10,9 +10,9 @@ namespace Shop.Data.Models
 {
     public class ShopCart
     {
-        private readonly AppDBContent appDBContent;
+        private readonly AppDBContext appDBContent;
 
-        public ShopCart(AppDBContent appDBContent)
+        public ShopCart(AppDBContext appDBContent)
         {
             this.appDBContent = appDBContent;
         }
@@ -22,7 +22,7 @@ namespace Shop.Data.Models
         public static ShopCart GetCart(IServiceProvider services)
         {
             ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
-            var context = services.GetService<AppDBContent>();
+            var context = services.GetService<AppDBContext>();
             string shopCarId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
             session.SetString("CartId", shopCarId);
             return new ShopCart(context) { ShopCartId = shopCarId };
@@ -37,6 +37,23 @@ namespace Shop.Data.Models
             });
 
             appDBContent.SaveChanges();
+        }
+
+        public void ClearCart()
+        {
+            var cartItems = appDBContent.ShopCarItem.Where(c => c.ShopCartId == ShopCartId);
+            appDBContent.ShopCarItem.RemoveRange(cartItems);
+            appDBContent.SaveChanges();
+        }
+
+        public void RemoveFromCart(int itemId)
+        {
+            var cartItem = appDBContent.ShopCarItem.FirstOrDefault(c => c.Id == itemId && c.ShopCartId == ShopCartId);
+            if (cartItem != null)
+            {
+                appDBContent.ShopCarItem.Remove(cartItem);
+                appDBContent.SaveChanges();
+            }
         }
 
         public List<ShopCarItem> GetShopItems()

@@ -9,10 +9,10 @@ namespace Shop.Data.Repository
 {
     public class OrdersRepository : IAllOrders
     {
-        private readonly AppDBContent appDBContent;
+        private readonly AppDBContext appDBContent;
         private readonly ShopCart shopCart;
 
-        public OrdersRepository(AppDBContent appDBContent, ShopCart shopCart)
+        public OrdersRepository(AppDBContext appDBContent, ShopCart shopCart)
         {
             this.appDBContent = appDBContent;
             this.shopCart = shopCart;
@@ -30,11 +30,11 @@ namespace Shop.Data.Repository
             {
                 var orderDetail = new OrderDetail()
                 {
-                    CarID = el.Car.Id,
-                    OrderID = order.Id,
+                    CarId = el.Car.Id,
+                    OrderId = order.Id,
                     Price = el.Car.Price
                 };
-     
+                appDBContent.OrderDetail.Add(orderDetail);
             }
 
             appDBContent.SaveChanges();

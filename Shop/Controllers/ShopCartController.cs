@@ -39,9 +39,16 @@ namespace Shop.Controllers
             if(item != null)
             {
                 _shopCart.AddToCart(item);
-                 
+                
             }
             return RedirectToAction("Index");
         }
+
+        public IActionResult RemoveFromCart(int id)
+        {
+            _shopCart.RemoveFromCart(id);
+            return RedirectToAction("Index");
+        }
+
     }
 }

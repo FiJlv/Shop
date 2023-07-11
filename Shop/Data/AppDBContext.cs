@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Data
 {
-    public class AppDBContent : DbContext
+    public class AppDBContext : DbContext
     {
         public DbSet<Car> Car { get; set; }
         public DbSet<Category> Category { get; set; }
@@ -15,7 +15,7 @@ namespace Shop.Data
         public DbSet<Order> Order { get; set; }
         public DbSet<OrderDetail> OrderDetail { get; set; }
 
-        public AppDBContent(DbContextOptions<AppDBContent> options) : base(options)
+        public AppDBContext(DbContextOptions<AppDBContext> options) : base(options)
         {
             Database.EnsureCreated();
         }

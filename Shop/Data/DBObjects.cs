@@ -11,14 +11,14 @@ namespace Shop.Data
 {
     public class DBObjects
     {
-        public static void Initial(AppDBContent content)
+        public static void Initial(AppDBContext context)
         {  
-            if (!content.Category.Any())
-            content.Category.AddRange(Categories.Select(c => c.Value));
+            if (!context.Category.Any())
+            context.Category.AddRange(Categories.Select(c => c.Value));
 
-            if (!content.Car.Any())
+            if (!context.Car.Any())
             {
-                content.AddRange(
+                context.AddRange(
                      new Car
                      {
                          Name = "Tesla Model S",
@@ -63,7 +63,7 @@ namespace Shop.Data
                          Available = true,
                          Category = Categories["Electric cars"]
                      },
-                     new Car
+                    new Car
                      {
                          Name = "Porsche Panamera",
                          ShortDesc = "Sporty luxury sedan",
@@ -74,7 +74,7 @@ namespace Shop.Data
                          Available = true,
                          Category = Categories["Gasoline cars"]
                      },
-                      new Car
+                    new Car
                       {
                           Name = "Nissan Leaf 2020",
                           ShortDesc = "Сomfortable, cost-effective",
@@ -85,7 +85,7 @@ namespace Shop.Data
                           Available = true,
                           Category = Categories["Electric cars"]
                       },
-                       new Car
+                    new Car
                        {
                            Name = "Alfa Romeo",
                            ShortDesc = "Passability, reliability",
@@ -96,7 +96,7 @@ namespace Shop.Data
                            Available = true,
                            Category = Categories["Gasoline cars"]
                        },
-                         new Car
+                    new Car
                          {
                              Name = "Porsche Taycan",
                              ShortDesc = "High-performance, electric",
@@ -194,14 +194,15 @@ namespace Shop.Data
 
                 );
             }
-            content.SaveChanges();
+
+            context.SaveChanges();
         }
-        private static Dictionary<string, Category> category;
+        private static Dictionary<string, Category> Category;
         public static Dictionary<string, Category> Categories
         {
             get
             {
-                if (category == null)
+                if (Category == null)
                 {
                     var list = new Category[]
                     {
@@ -209,13 +210,13 @@ namespace Shop.Data
                         new Category {CategoryName = "Gasoline cars", Desc = "Internal combustion engine vehicles"}
                     };
 
-                    category = new Dictionary<string, Category>();
+                    Category = new Dictionary<string, Category>();
                     foreach (Category el in list)
-                        category.Add(el.CategoryName, el);
+                        Category.Add(el.CategoryName, el);
 
                 }
 
-                return category;
+                return Category;
             } 
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shop.Data;
 using Shop.Data.Interfaces;
 using Shop.Data.Models;
 using System;
@@ -25,6 +26,7 @@ namespace Shop.Controllers
         [HttpPost]
         public IActionResult Checkout(Order order)
         {
+
             shopCart.ListShopItems = shopCart.GetShopItems();      
 
             if(shopCart.ListShopItems.Count == 0)
@@ -35,8 +37,9 @@ namespace Shop.Controllers
             if (ModelState.IsValid)
             {
                 allOrders.CreateOrder(order);
+                shopCart.ClearCart();
                 return RedirectToAction("Complete");
-            }
+            }          
 
             return View(order);
         }

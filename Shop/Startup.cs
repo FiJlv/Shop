@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;    
 using Shop.Data;
 using Shop.Data.Interfaces;
-using Shop.Data.Mocks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +31,7 @@ namespace Shop
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDBContent>(options => options.UseSqlServer(_confstring.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AppDBContext>(options => options.UseSqlServer(_confstring.GetConnectionString("DefaultConnection")));
             services.AddTransient<IAllCars, CarRepository>(); 
             services.AddTransient<ICarsCategory, CategoryRepository>();
             services.AddTransient<IAllOrders, OrdersRepository>();
@@ -61,7 +60,7 @@ namespace Shop
 
             using (var scope = app.ApplicationServices.CreateScope())
             {
-                AppDBContent content = scope.ServiceProvider.GetRequiredService<AppDBContent>();
+                AppDBContext content = scope.ServiceProvider.GetRequiredService<AppDBContext>();
                 DBObjects.Initial(content);
             }
         }

@@ -1,4 +1,4 @@
-﻿      using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Shop.Data.Interfaces;
 using Shop.Data.Models;
 using System;
@@ -10,9 +10,9 @@ namespace Shop.Data.Repository
 {
     public class CarRepository : IAllCars
     {
-        private readonly AppDBContent appDBContent;
+        private readonly AppDBContext appDBContent;
 
-        public CarRepository(AppDBContent appDBContent)
+        public CarRepository(AppDBContext appDBContent)
         {   
             this.appDBContent = appDBContent;
         }

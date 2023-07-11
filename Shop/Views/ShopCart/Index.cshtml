@@ -7,7 +7,8 @@
         <div class="alert alert-light" mt-3>
             <b>Car:</b> @el.Car.Name<br />
             <b>Price:</b> @el.Car.Price $
-         </div>
+            <a class="link-danger" href="/ShopCart/RemoveFromCart?id=@el.Id">Delete</a>
+        </div>    
     }
     <hr />
     <a class="btn btn-danger" asp-controller="Order" asp-action="Checkout">Pay</a>
