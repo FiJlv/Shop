@@ -1,0 +1,23 @@
+﻿@using Shop.ViewModels
+@model LoginViewModel
+
+<form asp-controller="Auth" asp-action="Login" method="post"> 
+
+    <div class="form-group">
+        <label asp-for="UserName"></label>
+        <div class="col-md-5">
+            <span asp-validation-for="UserName" class="text-danger"></span>
+            <input asp-for="UserName" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <div class="col-md-5">
+            <span asp-validation-for="Password" class="text-danger"></span>
+            <input asp-for="Password" class="form-control" />
+        </div>
+    </div>
+    <hr />
+    <input class="btn btn-success" type="submit" value="Sign In" />
+
+</form>

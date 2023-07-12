@@ -30,7 +30,7 @@ namespace Shop.Data.Models
 
         public void AddToCart(Car car)
         {
-            appDBContent.ShopCarItem.Add(new ShopCarItem {
+            appDBContent.ShopCarItems.Add(new ShopCarItem {
                 ShopCartId = ShopCartId,
                 Car = car,
                 Price = car.Price
@@ -41,24 +41,24 @@ namespace Shop.Data.Models
 
         public void ClearCart()
         {
-            var cartItems = appDBContent.ShopCarItem.Where(c => c.ShopCartId == ShopCartId);
-            appDBContent.ShopCarItem.RemoveRange(cartItems);
+            var cartItems = appDBContent.ShopCarItems.Where(c => c.ShopCartId == ShopCartId);
+            appDBContent.ShopCarItems.RemoveRange(cartItems);
             appDBContent.SaveChanges();
         }
 
         public void RemoveFromCart(int itemId)
         {
-            var cartItem = appDBContent.ShopCarItem.FirstOrDefault(c => c.Id == itemId && c.ShopCartId == ShopCartId);
+            var cartItem = appDBContent.ShopCarItems.FirstOrDefault(c => c.Id == itemId && c.ShopCartId == ShopCartId);
             if (cartItem != null)
             {
-                appDBContent.ShopCarItem.Remove(cartItem);
+                appDBContent.ShopCarItems.Remove(cartItem);
                 appDBContent.SaveChanges();
             }
         }
 
         public List<ShopCarItem> GetShopItems()
         {
-            return appDBContent.ShopCarItem.Where(c => c.ShopCartId == ShopCartId).Include(s => s.Car).ToList();
+            return appDBContent.ShopCarItems.Where(c => c.ShopCartId == ShopCartId).Include(s => s.Car).ToList();
         }
     }
 }

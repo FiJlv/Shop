@@ -13,10 +13,10 @@ namespace Shop.Data
     {
         public static void Initial(AppDBContext context)
         {  
-            if (!context.Category.Any())
-            context.Category.AddRange(Categories.Select(c => c.Value));
+            if (!context.Categories.Any())
+            context.Categories.AddRange(Categories.Select(c => c.Value));
 
-            if (!context.Car.Any())
+            if (!context.Cars.Any())
             {
                 context.AddRange(
                      new Car

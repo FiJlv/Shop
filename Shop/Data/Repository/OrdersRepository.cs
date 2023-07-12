@@ -21,7 +21,7 @@ namespace Shop.Data.Repository
        public void CreateOrder(Order order)
        {
             order.OrderTime = DateTime.Now;
-            appDBContent.Order.Add(order);
+            appDBContent.Orders.Add(order);
             appDBContent.SaveChanges();
 
             var items = shopCart.ListShopItems; 
@@ -34,7 +34,7 @@ namespace Shop.Data.Repository
                     OrderId = order.Id,
                     Price = el.Car.Price
                 };
-                appDBContent.OrderDetail.Add(orderDetail);
+                appDBContent.OrderDetails.Add(orderDetail);
             }
 
             appDBContent.SaveChanges();

@@ -53,13 +53,39 @@
                             </li>
                             <li>
                                 <a href=/ShopCart/ class="header__link">
-                                    Cart
+                                     Cart
                                 </a>
                             </li>
-                             <li>
-                                <a href=# class="header__link">
-                                    Sign In
-                                </a>
+                            <li>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <a asp-controller="Auth" asp-action="Logout" class="header__link">
+                                            Logout
+                                        </a>
+                                        if (User.Identity.Name == "admin")
+                                        {
+                                            <li>
+                                                 <a asp-controller="Panel" asp-action="Edit" class="header__link" style="color: greenyellow;">Add car</a>
+                                            </li>
+                                            <li>
+                                                 <a asp-controller="Panel" asp-action="Index" class="header__link" style="color: greenyellow;">Admin panel</a>
+                                            </li>
+                                        }
+                                        else 
+                                        {
+                                            <li>
+                                                <a href="#" class="telimg">
+                                                     <img src="/img/fav.png" width="20" height="20" alt="">
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Auth" asp-action="Login" class="header__link">
+                                            Sign In
+                                        </a>
+                                    }
                             </li>
                             <li>
                                 <a href="https://t.me/vldfltv" class="telimg">

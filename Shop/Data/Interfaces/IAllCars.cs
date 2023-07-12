@@ -1,4 +1,5 @@
-﻿using Shop.Data.Models;
+﻿using Microsoft.Extensions.Hosting;
+using Shop.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,9 @@ namespace Shop.Data.Interfaces
         IEnumerable<Car> Cars { get; }
         IEnumerable<Car> GetFavCars { get;}
         Car GetObjectCar(int carId);
+        void AddCar(Car car);
+        void UpdateCar(Car car);
+        void RemoveCar(int id);
+        Task<bool> SaveChangesAsync();
     }
 }

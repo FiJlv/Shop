@@ -17,7 +17,7 @@ namespace Shop.Data.Repository
             this.appDBContent = appDBContent;
         }
 
-        public IEnumerable<Category> AllCategories => appDBContent.Category;
+        public IEnumerable<Category> AllCategories => appDBContent.Categories;
     }
 
 }
