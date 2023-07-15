@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Shop.Data.Repository;
 using Shop.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using Shop.Data.FileManager;
 
 namespace Shop
 {
@@ -47,6 +48,7 @@ namespace Shop
             });
             services.AddTransient<IAllCars, CarRepository>(); 
             services.AddTransient<ICarsCategory, CategoryRepository>();
+            services.AddTransient<IFileManager, FileManager>();
             services.AddTransient<IAllOrders, OrdersRepository>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

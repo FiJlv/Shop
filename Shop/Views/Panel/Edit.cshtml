@@ -1,0 +1,44 @@
+﻿@model Shop.ViewModels.CarViewModel
+
+<div>
+    <form asp-controller="Panel" asp-action="Edit" method="post" enctype="multipart/form-data" class="container">
+        <input asp-for="Id" type="hidden" />
+        <div class="form-group">
+            <label for="Name">Name</label>
+            <input asp-for="Name" class="form-control" id="Name" />
+        </div>
+        <div class="form-group">
+            <label for="ShortDesc">ShortDesc</label>
+            <input asp-for="ShortDesc" class="form-control" id="ShortDesc" />
+        </div>
+        <div class="form-group">
+            <label for="Body">Body</label>
+            <textarea id="editor" asp-for="LongDesc" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="Price">Price</label>
+            <input asp-for="Price" class="form-control" id="Price" />
+        </div>
+        <div class="form-check">
+            <input asp-for="IsFavourite" class="form-check-input" id="IsFavourite" />
+            <label class="form-check-label" for="IsFavourite">IsFavourite</label>
+        </div>
+        <div class="form-check">
+            <input asp-for="Available" class="form-check-input" id="Available" />
+            <label class="form-check-label" for="Available">Available</label>
+        </div>
+        <div class="form-group">
+            <label for="Category">Category</label>
+            <select asp-for="CategoryID" class="form-control" id="Category">
+                <option value="1">Electric cars</option>
+                <option value="2">Gasoline cars</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Image">Image</label>
+            <input asp-for="CurrentImage" type="hidden" />
+            <input asp-for="Image" class="form-control" id="Image" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
