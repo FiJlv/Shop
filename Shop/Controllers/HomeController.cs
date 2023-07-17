@@ -24,5 +24,7 @@ namespace Shop.Controllers
             };
             return View(homeCars);
         }
+
+        public IActionResult Car(int id) => View(_carRep.GetObjectCar(id));
     }
 }

@@ -1,12 +1,37 @@
-﻿@model Shop.Data.Models.Car
-
-<div>
+﻿<div>
     @{
         var image_path = $"/img/{Model.Image}";
     }
-    <img class="img-thumbnail" src=@image_path alt ="@Model.Name" />
-    <h2>@Model.Name</h2>
+    <a asp-controller="Home" asp-action="Car" asp-route-id="@Model.Id">
+        <img src=@image_path alt="@Model.Name" style="width: 100%; height: 400px;" />
+    </a>
+    <h2 class="mt-4">@Model.Name</h2>
     <p>@Model.ShortDesc</p>
     <p>Price: @Model.Price $</p>
-    <p><a class="btn" asp-controller="ShopCart" asp-action="addToCart" asp-route-id="@Model.Id">Add to cart</a></p>
+    @if (Model.Available)
+    {
+        <p class="text-success">Available</p>
+
+        <div class="btn-fav-cart-container">
+            <p><a class="myBtn" asp-controller="ShopCart" asp-action="addToCart" asp-route-id="@Model.Id">Add to cart</a></p>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a href="#" class="favimg">
+                    <img src="/img/fav.png" alt="" class="fav-img">
+                </a>
+            }
+            else
+            {
+                <a href="/Auth/Login" class="favimg">
+                    <img src="/img/fav.png" alt="" class="fav-img">
+                </a>
+            }
+        </div>
+    }
+    else
+    {
+        <p class="text-danger">Not available</p>
+    }
+
 </div>

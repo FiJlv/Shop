@@ -1,12 +1,13 @@
 ﻿@model HomeViewModel
+
 <h3>Top selling</h3>
 <div class=" row mt-5 mb-2">
     @{
         foreach (Car car in Model.FavCars)
-        {
-            <article>
-                @Html.Partial("AllCars", car)
-            </article>
+        {         
+               <article>               
+                  @Html.Partial("AllCars", car)               
+               </article>    
         }
     }
 </div>

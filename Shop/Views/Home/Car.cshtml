@@ -1,0 +1,20 @@
+﻿@model Car
+
+<link href="~/css/car.css" rel="stylesheet" type="text/css" />
+
+<div class="container">
+
+    <div style="margin-right: 130px;">
+        @if (!String.IsNullOrEmpty(Model.Image))
+        {
+            var image_path = $"/img/{Model.Image}";
+            <img class="car-image" src="@image_path" />
+            <span class="title">@Model.Name</span>
+        }
+    </div>
+
+    <div class="post-body" style="margin-right: 130px;">
+        @Html.Raw(Model.LongDesc)
+    </div>    
+
+</div>

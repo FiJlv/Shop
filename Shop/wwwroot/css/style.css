@@ -103,12 +103,11 @@ body {
     margin: 0px 0px 0px 40px;
 }
 
-.header__list li:hover {
+.header__menu:not(.active) .header__list li:hover {
     transform: scale(1.1);
 }
 
 .header__link {
-    margin-left: 5%;
     font-family: Verdana, sans-serif;
     font-weight: 100;
     color: #ffffff;
@@ -240,7 +239,7 @@ header1 {
         line-height: 1.5;
     }
 
-/*Styles for images*/
+/* Styles for images */
 
 img {
     max-width: 100%;
@@ -263,10 +262,9 @@ img {
 /*Links*/
 
 a {
-    margin-left: 5%;
     font-family: Verdana, sans-serif;
     font-weight: 100;
-    color: #ffffff;
+    color: #1f1d1d;
     text-decoration: none;
     font-size: 0.8em;
 }
@@ -277,7 +275,7 @@ a:hover {
    -moz-transition: all.6s ease;
    -webkit-transition: all.6s ease;
     -ms-transition: all.6s ease;
-    }
+}
 
 /* */
 
@@ -294,6 +292,7 @@ a:hover {
 }
 
 #wrapper__articles {
+    margin-left:3.5%;
     float: left;
     width: 100%;
     margin-top: 20px;
@@ -301,8 +300,7 @@ a:hover {
 
     #wrapper__articles #articles {
         float: left;
-        width: 98%;
-        margin-left: 2%;
+        width: 100%;
     }
 
         #wrapper__articles #articles article {
@@ -317,10 +315,11 @@ a:hover {
         }
 
             #wrapper__articles #articles article:hover {
-                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
             }
 
 @media (min-width: 821px) {
+
     #wrapper__articles #articles article {
         width: calc(31.33333% - 20px);
         margin-right: 20px;
@@ -332,16 +331,33 @@ a:hover {
     #wrapper__articles #articles {
         float: left;
         width: 90%;
-        margin-left: 5%;
+        margin-right: 30%;
     }
 }
 
 #wrapper__articles #articles article img {
-    width: 100%;
-    height: 400px;
     object-fit: cover;
     border-radius: 10px 10px 0 0;
     margin-bottom: 10px;
+}
+    
+.favimg img {
+    transition: 0.6s transform;
+}
+
+.favimg img:hover {
+    transform: scale(1.2);
+}
+
+.btn-fav-cart-container {
+    display: flex;
+    align-items: center;
+}
+
+.fav-img {
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
 }
 
 #wrapper__articles #articles article h2 {
@@ -365,7 +381,7 @@ a:hover {
 
 /*Button*/
 
-.btn {
+.myBtn {
     margin-top: 10px;
     width: 80%;
     display: flex;
@@ -381,15 +397,14 @@ a:hover {
     cursor: pointer;
     border: none;
     border-radius: 20px;
-    box-shadow: 0 5px 0 ##1c1c1c;
     transition: background-color 0.5s ease 0s;
     position: relative;
     top: 0;
 }
 
-.btn:hover {
-     transform: scale(1.05);
-     background-color: #fff;
+.myBtn:hover {
+     transform: scale(1.03);
+     background-color: #f3f3f3;
 }
 
 .footer {

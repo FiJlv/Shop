@@ -38,7 +38,7 @@ namespace Shop.Data
                          Image = "2.jpg",
                          Price = 21000,
                          IsFavourite = true,
-                         Available = true,
+                         Available = false,
                          Category = Categories["Gasoline cars"]
                      },
                      new Car
