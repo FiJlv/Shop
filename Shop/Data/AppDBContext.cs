@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Data
 {
-    public class AppDBContext : IdentityDbContext
+    public class AppDBContext : IdentityDbContext<User>
     {
         public DbSet<Car> Cars { get; set; }
         public DbSet<Category> Categories { get; set; }

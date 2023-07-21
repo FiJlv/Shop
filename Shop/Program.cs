@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Shop.Data;
+using Shop.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Shop
             {
                 var scope = host.Services.CreateScope();
                 var ctx = scope.ServiceProvider.GetRequiredService<AppDBContext>();
-                var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+                var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
                 var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
                 ctx.Database.EnsureCreated();
@@ -36,7 +37,7 @@ namespace Shop
                 if (!ctx.Users.Any(u => u.UserName == "admin"))
                 {
                     //create an admin
-                    var adminUser = new IdentityUser
+                    var adminUser = new User
                     {
                         UserName = "admin",
                         Email = "admin@test.com"

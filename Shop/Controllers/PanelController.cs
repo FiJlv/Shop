@@ -17,17 +17,17 @@ namespace Shop.Controllers
     [Authorize(Roles = "Admin")]
     public class PanelController : Controller
     {
-        private IAllCars _carRep;
-        private IFileManager _fileManager;
+        private readonly IAllCars carRep;
+        private readonly IFileManager fileManager;
 
         public PanelController(IAllCars carRep, IFileManager fileManager)
         {
-            _carRep = carRep;
-            _fileManager = fileManager;
+            this.carRep = carRep;
+            this.fileManager = fileManager;
         }
         public IActionResult Index()
         {
-            var cars = _carRep.Cars;
+            var cars = carRep.Cars;
             return View(cars);
         }
         [HttpGet]
@@ -39,7 +39,7 @@ namespace Shop.Controllers
             }
             else
             {
-                var car = _carRep.GetObjectCar((int)id);
+                var car = carRep.GetObjectCar((int)id);
                 return View(new CarViewModel
                 {
                     Id = car.Id,
@@ -75,17 +75,17 @@ namespace Shop.Controllers
             else
             {
                 if (!string.IsNullOrEmpty(vm.CurrentImage))
-                    _fileManager.RemoveImage(vm.CurrentImage);
+                    fileManager.RemoveImage(vm.CurrentImage);
 
-                car.Image = await _fileManager.SaveImage(vm.Image);
+                car.Image = await fileManager.SaveImage(vm.Image);
             }
 
             if (car.Id > 0)
-                _carRep.UpdateCar(car);
+                carRep.UpdateCar(car);
             else
-                _carRep.AddCar(car);
+                carRep.AddCar(car);
 
-            if (await _carRep.SaveChangesAsync())
+            if (await carRep.SaveChangesAsync())
                 return RedirectToAction("Index");
             else
                 return View(vm);
@@ -93,8 +93,8 @@ namespace Shop.Controllers
         [HttpGet]
         public async Task<IActionResult> Remove(int id)
         {
-            _carRep.RemoveCar(id);
-            await _carRep.SaveChangesAsync();
+            carRep.RemoveCar(id);
+            await carRep.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

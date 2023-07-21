@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Shop.Data;
 using Shop.Data.Interfaces;
 using Shop.Data.Models;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Shop.Controllers
 {
@@ -13,19 +15,22 @@ namespace Shop.Controllers
     {
         private readonly IAllOrders allOrders;
         private readonly ShopCart shopCart;
-        public OrderController(IAllOrders allOrders, ShopCart shopCart)
+        private readonly UserManager<User> userManager;
+        public OrderController(IAllOrders allOrders, ShopCart shopCart, UserManager<User> userManager)
         {
             this.allOrders = allOrders;
             this.shopCart = shopCart;
+            this.userManager = userManager;
         }
 
-       public IActionResult Checkout()
-       {
-            return View();  
-       }
+        public IActionResult Checkout()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Checkout(Order order)
-        {
+        {        
 
             shopCart.ListShopItems = shopCart.GetShopItems();      
 
@@ -42,6 +47,29 @@ namespace Shop.Controllers
             }          
 
             return View(order);
+        }
+
+        public async Task<IActionResult> CheckoutForAuthenticatedUser(string name)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+
+                User user = await userManager.FindByNameAsync(name);
+
+                var order = new Order
+                {
+                    Name = user.UserName,
+                    Surname = user.Surname,
+                    Address = user.Address,
+                    Email = user.Email,
+                    Phone = user.PhoneNumber,
+                    OrderTime = DateTime.Now
+                };
+
+                Checkout(order);
+
+            }
+            return RedirectToAction("Complete");
         }
 
         public IActionResult Complete()

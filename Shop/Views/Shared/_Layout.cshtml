@@ -62,11 +62,8 @@
                                         <a asp-controller="Auth" asp-action="Logout" class="header__link">
                                             Logout
                                         </a>
-                                        if (User.Identity.Name == "admin")
+                                        if (User.IsInRole("Admin"))
                                         {
-                                            <li>
-                                                 <a asp-controller="Panel" asp-action="Edit" class="header__link" style="color: greenyellow;">Add car</a>
-                                            </li>
                                             <li>
                                                  <a asp-controller="Panel" asp-action="Index" class="header__link" style="color: greenyellow;">Admin panel</a>
                                             </li>

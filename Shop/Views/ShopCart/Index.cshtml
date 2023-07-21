@@ -10,7 +10,14 @@
             <a class="link-danger" href="/ShopCart/RemoveFromCart?id=@el.Id">Delete</a>
         </div>    
     }
-    <hr />
-    <a class="myBtn" asp-controller="Order" asp-action="Checkout">Pay</a>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a class="myBtn" asp-controller="Order" asp-action="CheckoutForAuthenticatedUser" asp-route-name="@User.Identity.Name">Pay</a>
+    }
+    else if (!User.Identity.IsAuthenticated)
+    {
+        <a class="myBtn" asp-controller="Order" asp-action="Checkout">Pay</a>
+    }    
 
 </div>

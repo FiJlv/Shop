@@ -12,13 +12,13 @@ namespace Shop.Controllers
 {
     public class CarsController : Controller
     {
-        private readonly IAllCars _allCars;
-        private readonly ICarsCategory _allCategories;
+        private readonly IAllCars allCars;
+        private readonly ICarsCategory allCategories;
 
         public CarsController(IAllCars iAllCars, ICarsCategory iCarsCategory)
         {
-            _allCars = iAllCars;
-            _allCategories = iCarsCategory;
+            allCars = iAllCars;
+            allCategories = iCarsCategory;
         }
         [Route("Cars/List")]
         [Route("Cars/List/{category}")]
@@ -29,18 +29,18 @@ namespace Shop.Controllers
             string currCategory = "";
             if (string.IsNullOrEmpty(category))
             {
-                cars = _allCars.Cars.OrderBy(i => i.Id);
+                cars = allCars.Cars.OrderBy(i => i.Id);
             }
             else
             {
                 if (string.Equals("electro", category, StringComparison.OrdinalIgnoreCase))
                 {
-                    cars = _allCars.Cars.Where(i => i.Category.CategoryName.Equals("Electric cars")).OrderBy(i => i.Id);
+                    cars = allCars.Cars.Where(i => i.Category.CategoryName.Equals("Electric cars")).OrderBy(i => i.Id);
                     currCategory = "Electric cars";
                 }
                 else if (string.Equals("fuel", category, StringComparison.OrdinalIgnoreCase))
                 {
-                    cars = _allCars.Cars.Where(i => i.Category.CategoryName.Equals("Gasoline cars")).OrderBy(i => i.Id);
+                    cars = allCars.Cars.Where(i => i.Category.CategoryName.Equals("Gasoline cars")).OrderBy(i => i.Id);
                     currCategory = "Gasoline cars";
                 };
             }

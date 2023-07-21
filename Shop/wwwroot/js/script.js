@@ -6,11 +6,6 @@ $(document).ready(function ($) {
 	});
 });
 
-function toggleMenu() {
-	var headerMenu = document.querySelector('.header__menu');
-	headerMenu.classList.toggle('active');
-}
-
 "use strict"
 
 //Button

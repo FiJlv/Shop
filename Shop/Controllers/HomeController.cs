@@ -10,21 +10,21 @@ namespace Shop.Controllers
 {
     public class HomeController : Controller
     {
-        private IAllCars _carRep;
+        private readonly IAllCars carRep;
         public HomeController(IAllCars carRep)
         {
-            _carRep = carRep;
+            this.carRep = carRep;
         }
 
         public ViewResult Index()
         {
             var homeCars = new HomeViewModel
             {
-                FavCars = _carRep.GetFavCars
+                FavCars = carRep.GetFavCars
             };
             return View(homeCars);
         }
 
-        public IActionResult Car(int id) => View(_carRep.GetObjectCar(id));
+        public IActionResult Car(int id) => View(carRep.GetObjectCar(id));
     }
 }

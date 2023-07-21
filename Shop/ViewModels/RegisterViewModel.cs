@@ -1,17 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Data.Models
+namespace Shop.ViewModels
 {
-    public class Order
+    public class RegisterViewModel
     {
-        [BindNever]
-        public int Id { get; set; }
-
         [Display(Name = "Name")]
         [StringLength(30)]
         [Required(ErrorMessage = "The name must be at least 5 characters long")]
@@ -20,7 +12,6 @@ namespace Shop.Data.Models
         [Display(Name = "Surname")]
         [StringLength(30)]
         [Required(ErrorMessage = "The surname must be at least 5 characters long")]
-
         public string Surname { get; set; }
 
         [Display(Name = "Address")]
@@ -40,10 +31,12 @@ namespace Shop.Data.Models
         [Required(ErrorMessage = "The phone number must be at least 10 characters long")]
         public string Phone { get; set; }
 
-        [BindNever]
-        [ScaffoldColumn(false)]
-        public DateTime OrderTime { get; set; }
-        public List<OrderDetail> OrderDetails { get; set; }
+        [Display(Name = "Password")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
 
+        [Display(Name = "ConfirmPassword")]
+        [Compare("Password")]
+        public string ConfirmPassword { get; set; }
     }
 }

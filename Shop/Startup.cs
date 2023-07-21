@@ -34,14 +34,15 @@ namespace Shop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDBContext>(options => options.UseSqlServer(_confstring.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 6;
             })
-           .AddEntityFrameworkStores<AppDBContext>();
+           .AddEntityFrameworkStores<AppDBContext>()
+           .AddDefaultTokenProviders();
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Auth/Login";
