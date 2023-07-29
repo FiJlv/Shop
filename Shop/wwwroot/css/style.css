@@ -292,7 +292,6 @@ a:hover {
 }
 
 #wrapper__articles {
-    margin-left:3.5%;
     float: left;
     width: 100%;
     margin-top: 20px;
@@ -321,8 +320,9 @@ a:hover {
 @media (min-width: 821px) {
 
     #wrapper__articles #articles article {
-        width: calc(31.33333% - 20px);
-        margin-right: 20px;
+        width: calc(33.33333%  - 20px );
+        margin-right: 10px;
+        margin-left: 10px;
         min-height: 400px;
     }
 }
@@ -331,7 +331,7 @@ a:hover {
     #wrapper__articles #articles {
         float: left;
         width: 90%;
-        margin-right: 30%;
+        margin-left: 5%;
     }
 }
 

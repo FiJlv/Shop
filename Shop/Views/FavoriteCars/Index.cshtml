@@ -1,0 +1,38 @@
+﻿@model List<Car>
+<script src="~/js/forFavorite.js"></script>
+<link href="~/css/forFavorite.css" rel="stylesheet" type="text/css" />
+
+<h2>My favorite cars</h2>
+
+@if (Model.Any())
+{
+    <ul class="list-group">
+        @foreach (var car in Model)
+        {
+            var image_path = $"/img/{car.Image}";
+
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-4">
+                        <a asp-controller="Home" asp-action="Car" asp-route-id="@car.Id">
+                            <img src="@image_path" alt="@car.Name" class="car-image">
+                        </a>
+                    </div>
+                    <div class="col-8">
+                        <h5>@car.Name</h5>
+                        <p>@car.ShortDesc</p>
+                        <p>Price: @car.Price</p>
+                        <div class="d-flex">
+                            <a class="btn btn-danger mr-2" onclick="Remove(@car.Id)" href="#">Delete</a>
+                            <a class="btn btn-primary" asp-controller="ShopCart" asp-action="addToCart" asp-route-id="@car.Id">Add to cart</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Favorites list is empty</p>
+}

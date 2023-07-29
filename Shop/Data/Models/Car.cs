@@ -18,5 +18,22 @@ namespace Shop.Data.Models
         public bool Available { get; set; }
         public int CategoryID { get; set; }
         public virtual Category Category { get; set; }
+        public ICollection<User> Users { get; set; }
+        public Car()
+        {
+            Users = new List<User>();
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is Car))
+                return false;
+
+            return this.Id == ((Car)obj).Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
     }
 }
