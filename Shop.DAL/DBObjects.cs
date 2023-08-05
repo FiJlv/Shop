@@ -6,11 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Shop.Data
 {
     public class DBObjects
     {
+        private const string electricCars = "Electric";
+        private const string gasolineCars = "Gasoline";
         public static void Initial(AppDBContext context)
         {  
             if (!context.Categories.Any())
@@ -28,7 +31,7 @@ namespace Shop.Data
                          Price = 30000,
                          IsFavourite = false,
                          Available = true,
-                         Category = Categories["Electric cars"]
+                         Category = Categories[electricCars]
                      },
                      new Car
                      {
@@ -39,7 +42,7 @@ namespace Shop.Data
                          Price = 21000,
                          IsFavourite = true,
                          Available = false,
-                         Category = Categories["Gasoline cars"]
+                         Category = Categories[gasolineCars]
                      },
                      new Car
                      {
@@ -50,7 +53,7 @@ namespace Shop.Data
                          Price = 85000,
                          IsFavourite = false,
                          Available = true,
-                         Category = Categories["Gasoline cars"]
+                         Category = Categories[gasolineCars]
                      },
                      new Car
                      {
@@ -61,7 +64,7 @@ namespace Shop.Data
                          Price = 110000,
                          IsFavourite = false,
                          Available = true,
-                         Category = Categories["Electric cars"]
+                         Category = Categories[electricCars]
                      },
                     new Car
                      {
@@ -72,7 +75,7 @@ namespace Shop.Data
                          Price = 90000,
                          IsFavourite = false,
                          Available = true,
-                         Category = Categories["Gasoline cars"]
+                         Category = Categories[gasolineCars]
                      },
                     new Car
                       {
@@ -83,7 +86,7 @@ namespace Shop.Data
                           Price = 20000,
                           IsFavourite = true,
                           Available = true,
-                          Category = Categories["Electric cars"]
+                          Category = Categories[electricCars]
                       },
                     new Car
                        {
@@ -94,7 +97,7 @@ namespace Shop.Data
                            Price = 110000,
                            IsFavourite = true,
                            Available = true,
-                           Category = Categories["Gasoline cars"]
+                           Category = Categories[gasolineCars]
                        },
                     new Car
                          {
@@ -105,7 +108,7 @@ namespace Shop.Data
                              Price = 90000,
                              IsFavourite = false,
                              Available = true,
-                             Category = Categories["Electric cars"]
+                             Category = Categories[electricCars]
                          },
 
                     new Car
@@ -117,7 +120,7 @@ namespace Shop.Data
                         Price = 95000,
                         IsFavourite = false,
                         Available = true,
-                        Category = Categories["Electric cars"]
+                        Category = Categories[electricCars]
                     },
 
                     new Car
@@ -129,7 +132,7 @@ namespace Shop.Data
                         Price = 80000,
                         IsFavourite = false,
                         Available = true,
-                        Category = Categories["Electric cars"]
+                        Category = Categories[electricCars]
                     },
 
                     new Car
@@ -141,7 +144,7 @@ namespace Shop.Data
                         Price = 35000,
                         IsFavourite = false,
                         Available = true,
-                        Category = Categories["Gasoline cars"]
+                        Category = Categories[gasolineCars]
                     },
 
                     new Car
@@ -153,7 +156,7 @@ namespace Shop.Data
                         Price = 40000,
                         IsFavourite = false,
                         Available = true,
-                        Category = Categories["Gasoline cars"]
+                        Category = Categories[gasolineCars]
                     },
 
                     new Car
@@ -165,7 +168,7 @@ namespace Shop.Data
                         Price = 60000,
                         IsFavourite = false,
                         Available = true,
-                        Category = Categories["Gasoline cars"]
+                        Category = Categories[gasolineCars]
                     },
 
                     new Car
@@ -177,7 +180,7 @@ namespace Shop.Data
                         Price = 110000,
                         IsFavourite = false,
                         Available = true,
-                        Category = Categories["Gasoline cars"]
+                        Category = Categories[gasolineCars]
                     },
 
                     new Car
@@ -189,7 +192,7 @@ namespace Shop.Data
                         Price = 160000,
                         IsFavourite = false,
                         Available = true,
-                        Category = Categories["Gasoline cars"]
+                        Category = Categories[gasolineCars]
                     }
 
                 );
@@ -206,8 +209,8 @@ namespace Shop.Data
                 {
                     var list = new Category[]
                     {
-                        new Category {CategoryName = "Electric cars", Desc = "A modern and economical mode of transportation"},
-                        new Category {CategoryName = "Gasoline cars", Desc = "Internal combustion engine vehicles"}
+                        new Category {CategoryName = electricCars, Desc = "A modern and economical mode of transportation"},
+                        new Category {CategoryName = gasolineCars, Desc = "Internal combustion engine vehicles"}
                     };
 
                     Category = new Dictionary<string, Category>();

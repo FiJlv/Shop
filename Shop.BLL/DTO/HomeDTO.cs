@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Shop.Data.Interfaces
+namespace Shop.ViewModels
 {
-    public interface IAllOrders
+    public class HomeDTO
     {
-        void CreateOrder(Order order);
+        public IEnumerable<Car> FavCars { get; set; }
     }
 }

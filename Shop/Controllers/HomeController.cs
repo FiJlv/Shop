@@ -1,30 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop.Data.Interfaces;
+using Shop.BLL.Intefaces;
+using Shop.Services;
 using Shop.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace Shop.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IAllCars carRep;
-        public HomeController(IAllCars carRep)
+        private readonly ICarRepository carRepository;
+        public HomeController(ICarRepository carRepository)
         {
-            this.carRep = carRep;
+            this.carRepository = carRepository;
         }
 
         public ViewResult Index()
         {
-            var homeCars = new HomeViewModel
+            var homeCars = new HomeDTO
             {
-                FavCars = carRep.GetFavCars
+                FavCars = carRepository.GetFavCars
             };
             return View(homeCars);
         }
 
-        public IActionResult Car(int id) => View(carRep.GetObjectCar(id));
+        public IActionResult Car(int id) => View(carRepository.GetObjectCar(id));
     }
 }

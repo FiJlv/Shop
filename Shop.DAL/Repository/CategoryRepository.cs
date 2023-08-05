@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Data.Repository
 {
-    public class CategoryRepository : ICarsCategory
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly AppDBContext appDBContent;
 
@@ -17,7 +17,15 @@ namespace Shop.Data.Repository
             this.appDBContent = appDBContent;
         }
 
-        public IEnumerable<Category> AllCategories => appDBContent.Categories;
+        public IEnumerable<Category> GetAllCategories()
+        {
+            return appDBContent.Categories;
+        }
+
+        public Category GetCategoryByName(string categoryName)
+        {
+            return appDBContent.Categories.FirstOrDefault(c => c.CategoryName.Equals(categoryName));
+        }
     }
 
 }

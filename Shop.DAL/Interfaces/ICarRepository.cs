@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace Shop.Data.Interfaces
 {
-    public interface IAllCars
+    public interface ICarRepository
     {
-        IEnumerable<Car> Cars { get; }
+        IEnumerable<Car> GetAllCars();
         IEnumerable<Car> GetFavCars { get;}
+        IEnumerable<Car> GetCarsByCategory(string category);
         Car GetObjectCar(int carId);
         void AddCar(Car car);
         void UpdateCar(Car car);

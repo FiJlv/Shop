@@ -8,6 +8,10 @@ namespace Shop.Controllers
 {
     public class AuthController : Controller
     {
+        private const string Index = "Index";
+        private const string Panel = "Panel";
+        private const string Home = "Home";
+
         private readonly SignInManager<User> signInManager;
         private readonly UserManager<User> userManager;
 
@@ -20,13 +24,13 @@ namespace Shop.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View(new LoginViewModel());
+            return View(new LoginDTO());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel vm)
+        public async Task<IActionResult> Login(LoginDTO vm)
         {
-            var result = await signInManager.PasswordSignInAsync(vm.UserName, vm.Password, false, false);
+            var result = await signInManager.PasswordSignInAsync(vm.UserName, vm.Password, isPersistent: false, lockoutOnFailure: false);
 
             if (!result.Succeeded)
             {
@@ -39,19 +43,19 @@ namespace Shop.Controllers
 
             if (isAdmin)
             {
-                return RedirectToAction("Index", "Panel");
+                return RedirectToAction(Index, Panel);
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(Index, Home);
 
         }
         public IActionResult Register()
         {
-            return View(new RegisterViewModel());
+            return View(new RegisterDTO());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel vm)
+        public async Task<IActionResult> Register(RegisterDTO vm)
         {
             if (!ModelState.IsValid) 
             {
@@ -71,9 +75,9 @@ namespace Shop.Controllers
 
             if(result.Succeeded) 
             {
-                await signInManager.SignInAsync(user, false);
+                await signInManager.SignInAsync(user, isPersistent: false);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction(Index, Home);
             }
 
             return View(vm);
@@ -82,7 +86,7 @@ namespace Shop.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(Index, Home);
         }
     }
 }

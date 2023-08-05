@@ -12,9 +12,10 @@ namespace Shop.Controllers
 {
     public class ShopCartController: Controller
     {
-        private readonly IAllCars carRep;
+        private const string MyIndex = "Index";
+        private readonly ICarRepository carRep;
         private readonly ShopCart shopCart;
-        public ShopCartController(IAllCars carRep, ShopCart shopCart)
+        public ShopCartController(ICarRepository carRep, ShopCart shopCart)
         {
             this.carRep = carRep;
             this.shopCart = shopCart;
@@ -25,7 +26,7 @@ namespace Shop.Controllers
             var items = shopCart.GetShopItems();
             shopCart.ListShopItems = items;
 
-            var obj = new ShopCartViewModel
+            var obj = new ShopCartDTO
             {
                 ShopCart = shopCart
             };
@@ -35,20 +36,18 @@ namespace Shop.Controllers
 
         public RedirectToActionResult AddToCart(int id)
         {
-            var item = carRep.Cars.FirstOrDefault(i => i.Id == id); 
+            var item = carRep.GetAllCars().FirstOrDefault(i => i.Id == id); 
             if(item != null)
             {
-                shopCart.AddToCart(item);
-                
+                shopCart.AddToCart(item);          
             }
-            return RedirectToAction("Index");
+            return RedirectToAction(MyIndex);
         }
 
         public IActionResult RemoveFromCart(int id)
         {
             shopCart.RemoveFromCart(id);
-            return RedirectToAction("Index");
+            return RedirectToAction(MyIndex);
         }
-
     }
 }

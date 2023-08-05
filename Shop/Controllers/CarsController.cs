@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shop.Data.FileManager;
 using Shop.Data.Interfaces;
-using Shop.Data.Models;
+using Shop.Services;
 using Shop.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,45 +13,17 @@ namespace Shop.Controllers
 {
     public class CarsController : Controller
     {
-        private readonly IAllCars allCars;
-        private readonly ICarsCategory allCategories;
+        private readonly CarService carsManager;
 
-        public CarsController(IAllCars iAllCars, ICarsCategory iCarsCategory)
+        public CarsController(ICarRepository carRepository, ICategoryRepository categoryRepository)
         {
-            allCars = iAllCars;
-            allCategories = iCarsCategory;
+            carsManager = new CarService(carRepository, categoryRepository);
         }
-        [Route("Cars/List")]
-        [Route("Cars/List/{category}")]
-        public ViewResult List(string category)    
+
+        [Route("Cars/List/{category?}")]
+        public ViewResult List(string category)
         {
-            string _category = category;
-            IEnumerable<Car> cars = null;
-            string currCategory = "";
-            if (string.IsNullOrEmpty(category))
-            {
-                cars = allCars.Cars.OrderBy(i => i.Id);
-            }
-            else
-            {
-                if (string.Equals("electro", category, StringComparison.OrdinalIgnoreCase))
-                {
-                    cars = allCars.Cars.Where(i => i.Category.CategoryName.Equals("Electric cars")).OrderBy(i => i.Id);
-                    currCategory = "Electric cars";
-                }
-                else if (string.Equals("fuel", category, StringComparison.OrdinalIgnoreCase))
-                {
-                    cars = allCars.Cars.Where(i => i.Category.CategoryName.Equals("Gasoline cars")).OrderBy(i => i.Id);
-                    currCategory = "Gasoline cars";
-                };
-            }
-
-            var carObj = new CarsListViewModel
-            {
-                AllCars = cars,
-                CurrCategory = currCategory
-
-            };
+            var carObj = carsManager.GetCarsListViewModel(category);
 
             ViewBag.Title = "Page with cars";
 

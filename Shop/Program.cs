@@ -40,7 +40,10 @@ namespace Shop
                     var adminUser = new User
                     {
                         UserName = "admin",
-                        Email = "admin@test.com"
+                        Email = "admin@some.com",
+                        Address = "some street",
+                        Surname = "No surname",
+                        PhoneNumber = "1234567890"
                     };
                     var result = userMgr.CreateAsync(adminUser, "password").GetAwaiter().GetResult();
 

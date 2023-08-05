@@ -3,7 +3,7 @@ using Shop.Data.Models;
 
 namespace Shop.ViewModels
 {
-    public class CarViewModel
+    public class CarDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }

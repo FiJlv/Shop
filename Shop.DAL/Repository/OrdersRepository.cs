@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Data.Repository
 {
-    public class OrdersRepository : IAllOrders
+    public class OrdersRepository : IOrderRepository
     {
         private readonly AppDBContext appDBContent;
         private readonly ShopCart shopCart;
@@ -24,15 +24,15 @@ namespace Shop.Data.Repository
             appDBContent.Orders.Add(order);
             appDBContent.SaveChanges();
 
-            var items = shopCart.ListShopItems; 
+            var shopItems = shopCart.ListShopItems; 
 
-            foreach(var el in items)
+            foreach(var item in shopItems)
             {
                 var orderDetail = new OrderDetail()
                 {
-                    CarId = el.Car.Id,
+                    CarId = item.Car.Id,
                     OrderId = order.Id,
-                    Price = el.Car.Price
+                    Price = item.Car.Price
                 };
                 appDBContent.OrderDetails.Add(orderDetail);
             }

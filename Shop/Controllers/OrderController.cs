@@ -13,10 +13,10 @@ namespace Shop.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly IAllOrders allOrders;
+        private readonly IOrderRepository allOrders;
         private readonly ShopCart shopCart;
         private readonly UserManager<User> userManager;
-        public OrderController(IAllOrders allOrders, ShopCart shopCart, UserManager<User> userManager)
+        public OrderController(IOrderRepository allOrders, ShopCart shopCart, UserManager<User> userManager)
         {
             this.allOrders = allOrders;
             this.shopCart = shopCart;
@@ -31,7 +31,6 @@ namespace Shop.Controllers
         [HttpPost]
         public IActionResult Checkout(Order order)
         {        
-
             shopCart.ListShopItems = shopCart.GetShopItems();      
 
             if(shopCart.ListShopItems.Count == 0)
@@ -44,7 +43,7 @@ namespace Shop.Controllers
                 allOrders.CreateOrder(order);
                 shopCart.ClearCart();
                 return RedirectToAction("Complete");
-            }          
+            }
 
             return View(order);
         }

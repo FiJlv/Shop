@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Shop.ViewModels
 {
-    public class HomeViewModel
+    public class CarsListDTO
     {
-        public IEnumerable<Car> FavCars { get; set; }
+        public IEnumerable<Car> AllCars { get; set; }
+        public string CurrCategory { get; set; }
     }
 }

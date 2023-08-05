@@ -20,7 +20,6 @@ namespace Shop.Data.Models
         [Display(Name = "Surname")]
         [StringLength(30)]
         [Required(ErrorMessage = "The surname must be at least 5 characters long")]
-
         public string Surname { get; set; }
 
         [Display(Name = "Address")]
@@ -43,7 +42,7 @@ namespace Shop.Data.Models
         [BindNever]
         [ScaffoldColumn(false)]
         public DateTime OrderTime { get; set; }
-        public List<OrderDetail> OrderDetails { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 
     }
 }

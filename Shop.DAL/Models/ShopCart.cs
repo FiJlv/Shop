@@ -10,14 +10,14 @@ namespace Shop.Data.Models
 {
     public class ShopCart
     {
+        public string ShopCartId { get; set; }
+        public List<ShopCarItem> ListShopItems { get; set; }
         private readonly AppDBContext appDBContent;
 
         public ShopCart(AppDBContext appDBContent)
         {
             this.appDBContent = appDBContent;
         }
-        public string ShopCartId { get; set; }
-        public List<ShopCarItem> ListShopItems { get; set; }        
 
         public static ShopCart GetCart(IServiceProvider services)
         {
@@ -30,7 +30,8 @@ namespace Shop.Data.Models
 
         public void AddToCart(Car car)
         {
-            appDBContent.ShopCarItems.Add(new ShopCarItem {
+            appDBContent.ShopCarItems.Add(new ShopCarItem
+            {
                 ShopCartId = ShopCartId,
                 Car = car,
                 Price = car.Price
@@ -46,6 +47,11 @@ namespace Shop.Data.Models
             appDBContent.SaveChanges();
         }
 
+        public List<ShopCarItem> GetShopItems()
+        {
+            return appDBContent.ShopCarItems.Where(c => c.ShopCartId == ShopCartId).Include(s => s.Car).ToList();
+        }
+
         public void RemoveFromCart(int itemId)
         {
             var cartItem = appDBContent.ShopCarItems.FirstOrDefault(c => c.Id == itemId && c.ShopCartId == ShopCartId);
@@ -56,9 +62,5 @@ namespace Shop.Data.Models
             }
         }
 
-        public List<ShopCarItem> GetShopItems()
-        {
-            return appDBContent.ShopCarItems.Where(c => c.ShopCartId == ShopCartId).Include(s => s.Car).ToList();
-        }
     }
 }

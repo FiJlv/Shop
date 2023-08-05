@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shop.ViewModels
 {
-    public class ShopCartViewModel
+    public class ShopCartDTO
     {
         public ShopCart ShopCart { get; set; }
     }   

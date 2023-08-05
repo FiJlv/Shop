@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Shop.Data.Interfaces
 {
-    public interface ICarsCategory
+    public interface IOrderRepository
     {
-        IEnumerable<Category> AllCategories { get; }
+        void CreateOrder(Order order);
     }
 }

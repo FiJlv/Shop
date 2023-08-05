@@ -6,74 +6,53 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using Microsoft.EntityFrameworkCore;
+using Shop.Services;
 
 namespace Shop.Controllers
 {
     public class FavoriteCarsController : Controller
     {
-        private readonly AppDBContext _dbContext;
+        private const string MyIndex = "Index";
 
-        public FavoriteCarsController(AppDBContext dbContext)
+        private readonly AppDBContext _dbContext;
+        private readonly FavoriteCarsService _favoriteCarsService;
+
+        public FavoriteCarsController(AppDBContext dbContext, FavoriteCarsService favoriteCarsService)
         {
             _dbContext = dbContext;
+            _favoriteCarsService = favoriteCarsService;
         }
 
         public IActionResult Index()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var user = _dbContext.Users.Include(u => u.FavoriteCars).FirstOrDefault(u => u.Id == userId);
+            var favoriteCars = _favoriteCarsService.GetFavoriteCarsForUser(userId);
 
-            if (user != null)
-            {
-                var favoriteCars = user.FavoriteCars.ToList();
-                return View(favoriteCars);
-            }
-
-            return View(new List<Car>());
+            return View(favoriteCars);
         }
 
         [HttpPost]
         public IActionResult Add(int id)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var user = _dbContext.Users.Include(u => u.FavoriteCars).FirstOrDefault(u => u.Id == userId);
             var car = _dbContext.Cars.Find(id);
 
-            if (user != null && car != null)
+            if (car != null)
             {
-                bool carAlreadyAdded = user.FavoriteCars.Any(c => c.Id == car.Id);
-
-                if (!carAlreadyAdded)
-                {
-                    user.FavoriteCars.Add(car);
-                    _dbContext.SaveChanges();
-                }
-                else
-                {
-                    Remove(id); 
-                }
+                _favoriteCarsService.AddFavoriteCarForUser(userId, car);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction(MyIndex);
         }
 
         [HttpPost]
         public IActionResult Remove(int id)
         {
+
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var user = _dbContext.Users.Include(u => u.FavoriteCars).FirstOrDefault(u => u.Id == userId);
+            _favoriteCarsService.RemoveFavoriteCarForUser(userId, id);
 
-            if (user != null)
-            {
-                var carToRemove = user.FavoriteCars.FirstOrDefault(c => c.Id == id);
-                if (carToRemove != null)
-                {
-                    user.FavoriteCars.Remove(carToRemove);
-                    _dbContext.SaveChanges();
-                }
-            }
-
-            return RedirectToAction("Index");
+            return RedirectToAction(MyIndex);
         }
     }
 }

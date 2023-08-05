@@ -16,6 +16,7 @@ using Shop.Data.Repository;
 using Shop.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Shop.Data.FileManager;
+using Shop.Services;
 
 namespace Shop
 {
@@ -47,10 +48,16 @@ namespace Shop
             {
                 options.LoginPath = "/Auth/Login";
             });
-            services.AddTransient<IAllCars, CarRepository>(); 
-            services.AddTransient<ICarsCategory, CategoryRepository>();
-            services.AddTransient<IFileManager, FileManager>();
-            services.AddTransient<IAllOrders, OrdersRepository>();
+            services.AddTransient<ICarRepository, CarRepository>(); 
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IOrderRepository, OrdersRepository>();
+            services.AddScoped<IFavoriteCarsRepository, FavoriteCarsRepository>();
+
+            services.AddScoped<CarService>();
+            services.AddScoped<PanelService>();
+            services.AddScoped<FavoriteCarsService>();
+
+            services.AddTransient<IFileManager, FileManager>();          
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sp => ShopCart.GetCart(sp));
