@@ -51,11 +51,9 @@ namespace Shop
             services.AddTransient<ICarRepository, CarRepository>(); 
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IOrderRepository, OrdersRepository>();
-            services.AddScoped<IFavoriteCarsRepository, FavoriteCarsRepository>();
 
             services.AddScoped<CarService>();
             services.AddScoped<PanelService>();
-            services.AddScoped<FavoriteCarsService>();
 
             services.AddTransient<IFileManager, FileManager>();          
 

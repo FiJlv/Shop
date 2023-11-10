@@ -57,5 +57,38 @@ namespace Shop.Data.Repository
         {
             return appDBContext.Cars.OrderBy(i => i.Id);
         }
+
+        public List<Car> GetFavoriteCarsForUser(string userId)
+        {
+            var user = appDBContext.Users.Include(u => u.FavoriteCars).FirstOrDefault(u => u.Id == userId);
+            return user?.FavoriteCars.ToList() ?? new List<Car>();
+        }
+
+        public void AddFavoriteCarForUser(string userId, Car car)
+        {
+
+            var user = appDBContext.Users.Include(u => u.FavoriteCars).FirstOrDefault(u => u.Id == userId);
+
+            if (user != null && car != null && !user.FavoriteCars.Any(c => c.Id == car.Id))
+            {
+                user.FavoriteCars.Add(car);
+                appDBContext.SaveChanges();
+            }
+        }
+
+        public void RemoveFavoriteCarForUser(string userId, int carId)
+        {
+            var user = appDBContext.Users.Include(u => u.FavoriteCars).FirstOrDefault(u => u.Id == userId);
+
+            if (user != null)
+            {
+                var carToRemove = user.FavoriteCars.FirstOrDefault(c => c.Id == carId);
+                if (carToRemove != null)
+                {
+                    user.FavoriteCars.Remove(carToRemove);
+                    appDBContext.SaveChanges();
+                }
+            }
+        }
     }
 }

@@ -1,7 +1,7 @@
 function Remove(carId) {
     $.ajax({
         type: 'POST',
-        url: '/FavoriteCars/Remove',
+        url: '/Cars/Remove',
         data: { id: carId },
         success: function (result) {
             location.reload();
@@ -14,7 +14,7 @@ function Remove(carId) {
 function addToFavorites(carId) {
     $.ajax({
         type: 'POST',
-        url: '/FavoriteCars/Add',
+        url: '/Cars/Add',
         data: { id: carId },
         success: function (result) {
             toastr.options = {

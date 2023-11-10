@@ -17,5 +17,8 @@ namespace Shop.Data.Interfaces
         void UpdateCar(Car car);
         void RemoveCar(int id);
         Task<bool> SaveChangesAsync();
+        List<Car> GetFavoriteCarsForUser(string userId);
+        void AddFavoriteCarForUser(string userId, Car car);
+        void RemoveFavoriteCarForUser(string userId, int carId);
     }
 }
