@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using PhotoSauce.MagicScaler;
 using System.Runtime.Serialization;
 
-namespace Shop.DAL.FileManager
+namespace Shop.BLL.FileManager
 {
     public class FileManager : IFileManager
     {

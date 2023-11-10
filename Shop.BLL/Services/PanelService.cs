@@ -1,6 +1,6 @@
 ﻿using Shop.BLL.Intefaces;
 using Shop.DAL.Repository;
-using Shop.DAL.FileManager;
+using Shop.BLL.FileManager;
 using Shop.DAL.Models;
 using Shop.BLL.DTO;
 

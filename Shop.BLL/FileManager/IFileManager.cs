@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Shop.DAL.FileManager
+namespace Shop.BLL.FileManager
 {
     public interface IFileManager
     {

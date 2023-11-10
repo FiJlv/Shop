@@ -11,7 +11,7 @@ using System;
 using Shop.DAL.Repository;
 using Shop.DAL.Models;
 using Microsoft.AspNetCore.Identity;
-using Shop.DAL.FileManager;
+using Shop.BLL.FileManager;
 using Shop.BLL.Services;
 
 namespace Shop

@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shop.DAL.Repository; //
-using Shop.DAL.FileManager; //
 using System.Threading.Tasks;
 using Shop.BLL.Services;
 using Shop.BLL.DTO;
@@ -15,9 +13,9 @@ namespace Shop.Controllers
 
         private readonly PanelService panelService;
 
-        public PanelController(UnitOfWork database, IFileManager fileManager)
+        public PanelController(PanelService panelService)
         {
-            panelService = new PanelService(database, fileManager);
+            this.panelService = panelService;
         }
 
         public IActionResult Index()

@@ -1,26 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop.BLL.DTO;
-using Shop.DAL.Repository; //
+using Shop.BLL.Services;
 
 namespace Shop.Controllers
 {
     public class HomeController : Controller
     {
-        UnitOfWork Database;
-        public HomeController(UnitOfWork database)
+        CarService carService;
+        public HomeController(CarService carService)
         {
-            Database = database;
+            this.carService = carService;
         }
 
         public ViewResult Index()
         {
             var homeCars = new HomeDTO
             {
-                FavCars = Database.Cars.GetSelectedCars
+                FavCars = carService.GetSelectedCars()
             };
             return View(homeCars);
         }
 
-        public IActionResult Car(int id) => View(Database.Cars.Get(id));
+        public IActionResult Car(int id) => View(carService.Get(id));
     }
 }

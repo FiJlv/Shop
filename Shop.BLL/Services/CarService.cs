@@ -40,6 +40,11 @@ namespace Shop.BLL.Services
             return Database.Cars.GetFavoriteCarsForUser(userId);
         }
 
+        public IEnumerable<Car> GetSelectedCars()
+        {
+            return Database.Cars.GetSelectedCars;
+        }
+
         public void AddFavoriteCarForUser(string userId, Car car)
         {
             Database.Cars.AddFavoriteCarForUser(userId, car);
