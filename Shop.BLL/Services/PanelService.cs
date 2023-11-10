@@ -1,6 +1,6 @@
 ﻿using Shop.BLL.Intefaces;
+using Shop.DAL.Repository;
 using Shop.Data.FileManager;
-using Shop.Data.Interfaces;
 using Shop.Data.Models;
 using Shop.ViewModels;
 using System.Collections.Generic;
@@ -10,23 +10,23 @@ namespace Shop.Services
 {
     public class PanelService: IPanelService
     {
-        private readonly ICarRepository carRep;
+        UnitOfWork Database;
         private readonly IFileManager fileManager;
 
-        public PanelService(ICarRepository carRep, IFileManager fileManager)
+        public PanelService(UnitOfWork database, IFileManager fileManager)
         {
-            this.carRep = carRep;
+            Database = database;
             this.fileManager = fileManager;
         }
 
         public IEnumerable<Car> GetAllCars()
         {
-            return carRep.GetAllCars();
+            return Database.Cars.GetAll();
         }
 
         public CarDTO GetCarViewModel(int id)
         {
-            var car = carRep.GetObjectCar(id);
+            var car = Database.Cars.Get(id);
             return new CarDTO
             {
                 Id = car.Id,
@@ -66,17 +66,17 @@ namespace Shop.Services
             }
 
             if (car.Id > 0)
-                carRep.UpdateCar(car);
+                Database.Cars.Update(car);
             else
-                carRep.AddCar(car);
+                Database.Cars.Create(car);
 
-            return await carRep.SaveChangesAsync();
+            return await Database.Cars.SaveChangesAsync();
         }
 
         public async Task RemoveCar(int id)
         {
-            carRep.RemoveCar(id);
-            await carRep.SaveChangesAsync();
+            Database.Cars.Delete(id);
+            await Database.Cars.SaveChangesAsync();
         }
     }
 

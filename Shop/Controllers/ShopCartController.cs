@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shop.Data.Interfaces;
+using Shop.DAL.Repository;
 using Shop.Data.Models;
 using Shop.Data.Repository;
 using Shop.ViewModels;
@@ -13,11 +13,11 @@ namespace Shop.Controllers
     public class ShopCartController: Controller
     {
         private const string MyIndex = "Index";
-        private readonly ICarRepository carRep;
+        UnitOfWork Database;
         private readonly ShopCart shopCart;
-        public ShopCartController(ICarRepository carRep, ShopCart shopCart)
+        public ShopCartController(UnitOfWork database, ShopCart shopCart)
         {
-            this.carRep = carRep;
+            Database = database;
             this.shopCart = shopCart;
         }
 
@@ -36,7 +36,7 @@ namespace Shop.Controllers
 
         public RedirectToActionResult AddToCart(int id)
         {
-            var item = carRep.GetAllCars().FirstOrDefault(i => i.Id == id); 
+            var item = Database.Cars.GetAll().FirstOrDefault(i => i.Id == id); 
             if(item != null)
             {
                 shopCart.AddToCart(item);          

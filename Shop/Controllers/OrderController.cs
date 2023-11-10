@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Shop.DAL.Repository;
 using Shop.Data;
-using Shop.Data.Interfaces;
 using Shop.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -13,12 +13,12 @@ namespace Shop.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly IOrderRepository allOrders;
+        UnitOfWork Database;
         private readonly ShopCart shopCart;
         private readonly UserManager<User> userManager;
-        public OrderController(IOrderRepository allOrders, ShopCart shopCart, UserManager<User> userManager)
+        public OrderController(ShopCart shopCart, UserManager<User> userManager, UnitOfWork database)
         {
-            this.allOrders = allOrders;
+            Database = database;
             this.shopCart = shopCart;
             this.userManager = userManager;
         }
@@ -40,7 +40,7 @@ namespace Shop.Controllers
 
             if (ModelState.IsValid)
             {
-                allOrders.CreateOrder(order);
+                Database.Orders.Create(order);
                 shopCart.ClearCart();
                 return RedirectToAction("Complete");
             }

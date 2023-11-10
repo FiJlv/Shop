@@ -1,6 +1,6 @@
 ﻿using Shop.BLL.Intefaces;
+using Shop.DAL.Repository;
 using Shop.Data.FileManager;
-using Shop.Data.Interfaces;
 using Shop.Data.Models;
 using Shop.Data.Repository;
 using Shop.ViewModels;
@@ -11,13 +11,11 @@ namespace Shop.Services
 {
     public class CarService: ICarService
     {
-        private readonly ICarRepository carRepository;
-        private readonly ICategoryRepository categoryRepository;
+        UnitOfWork Database; 
 
-        public CarService(ICarRepository carRepository, ICategoryRepository categoryRepository)
+        public CarService(UnitOfWork database)
         {
-            this.carRepository = carRepository;
-            this.categoryRepository = categoryRepository;
+            Database = database;
         }
 
         public CarsListDTO GetCarsListViewModel(string category)
@@ -25,12 +23,12 @@ namespace Shop.Services
             category ??= string.Empty;
 
             IEnumerable<Car> cars = string.IsNullOrEmpty(category)
-                ? carRepository.GetAllCars()
-                : carRepository.GetCarsByCategory(category);
+                ? Database.Cars.GetAll()
+                : Database.Cars.GetCarsByCategory(category);
 
             var currCategory = string.IsNullOrEmpty(category)
             ? string.Empty
-                : categoryRepository.GetCategoryByName(category)?.CategoryName ?? "";
+                : Database.Categories.GetCategoryByName(category)?.CategoryName ?? "";
 
             var carObj = new CarsListDTO
             {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
-using Shop.Data.Interfaces;
+using Shop.DAL.Interfaces;
 using Shop.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -9,41 +9,13 @@ using System.Threading.Tasks;
 
 namespace Shop.Data.Repository
 {
-    public class CarRepository : ICarRepository
+    public class CarRepository : IRepository<Car>
     {
         private readonly AppDBContext appDBContext;
 
         public CarRepository(AppDBContext appDBContent)
-        {   
+        {
             this.appDBContext = appDBContent;
-        }
-
-        public IEnumerable<Car> Cars => appDBContext.Cars.Include(c => c.Category);
-
-        public IEnumerable<Car> GetFavCars => appDBContext.Cars.Where(p => p.IsFavourite).Include(c => c.Category);
-
-        public Car GetObjectCar(int carId) => appDBContext.Cars.FirstOrDefault(p => p.Id == carId);
-        public void AddCar(Car car)
-        {
-            appDBContext.Cars.Add(car);
-        }
-
-        public void RemoveCar(int id)
-        {
-            appDBContext.Cars.Remove(GetObjectCar(id));
-        }
-        public void UpdateCar(Car car)
-        {
-            appDBContext.Cars.Update(car);
-        }
-
-        public async Task<bool> SaveChangesAsync()
-        {
-            if (await appDBContext.SaveChangesAsync() > 0)
-            {
-                return true;
-            }
-            return false;
         }
 
         public IEnumerable<Car> GetCarsByCategory(string category)
@@ -53,10 +25,36 @@ namespace Shop.Data.Repository
            .OrderBy(i => i.Id);
         }
 
-        public IEnumerable<Car> GetAllCars()
+        public IEnumerable<Car> GetAll()
         {
             return appDBContext.Cars.OrderBy(i => i.Id);
         }
+
+        public Car Get(int id)
+        {
+            return appDBContext.Cars.FirstOrDefault(p => p.Id == id);
+        }
+
+        public void Create(Car car)
+        {
+            appDBContext.Cars.Add(car);
+        }
+
+        public void Update(Car car)
+        {
+            appDBContext.Cars.Update(car);
+        }
+
+        public void Delete(int id)
+        {
+            appDBContext.Cars.Remove(Get(id));
+        }
+
+        //?
+        public IEnumerable<Car> Cars => appDBContext.Cars.Include(c => c.Category);
+
+        //?
+        public IEnumerable<Car> GetSelectedCars => appDBContext.Cars.Where(p => p.IsFavourite).Include(c => c.Category);
 
         public List<Car> GetFavoriteCarsForUser(string userId)
         {
@@ -89,6 +87,15 @@ namespace Shop.Data.Repository
                     appDBContext.SaveChanges();
                 }
             }
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            if (await appDBContext.SaveChangesAsync() > 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

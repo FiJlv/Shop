@@ -1,5 +1,6 @@
-﻿using Shop.Data.Interfaces;
+﻿using Shop.DAL.Interfaces;
 using Shop.Data.Models;
+using Shop.Migrations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Data.Repository
 {
-    public class OrdersRepository : IOrderRepository
+    public class OrdersRepository : IRepository<Order>
     {
         private readonly AppDBContext appDBContent;
         private readonly ShopCart shopCart;
@@ -18,13 +19,13 @@ namespace Shop.Data.Repository
             this.shopCart = shopCart;
         }
 
-       public void CreateOrder(Order order)
-       {
+        public void Create(Order order)
+        {
             order.OrderTime = DateTime.Now;
             appDBContent.Orders.Add(order);
             appDBContent.SaveChanges();
 
-            var shopItems = shopCart.ListShopItems; 
+            var shopItems = shopCart.ListShopItems;
 
             foreach(var item in shopItems)
             {
@@ -38,6 +39,26 @@ namespace Shop.Data.Repository
             }
 
             appDBContent.SaveChanges();
-       }
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Order Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Order> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Order item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

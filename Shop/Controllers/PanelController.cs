@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using Shop.DAL.Repository;
 using Shop.Data.FileManager;
-using Shop.Data.Interfaces;
 using Shop.Data.Models;
 using Shop.Services;
 using Shop.ViewModels;
@@ -22,9 +22,9 @@ namespace Shop.Controllers
 
         private readonly PanelService panelService;
 
-        public PanelController(ICarRepository carRep, IFileManager fileManager)
+        public PanelController(UnitOfWork database, IFileManager fileManager)
         {
-            panelService = new PanelService(carRep, fileManager);
+            panelService = new PanelService(database, fileManager);
         }
 
         public IActionResult Index()

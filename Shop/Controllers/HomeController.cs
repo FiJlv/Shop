@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shop.Data.Interfaces;
 using Shop.BLL.Intefaces;
 using Shop.Services;
 using Shop.ViewModels;
@@ -8,26 +7,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Shop.DAL.Repository;
 
 namespace Shop.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ICarRepository carRepository;
-        public HomeController(ICarRepository carRepository)
+        UnitOfWork Database;
+        public HomeController(UnitOfWork database)
         {
-            this.carRepository = carRepository;
+            Database = database;
         }
 
         public ViewResult Index()
         {
             var homeCars = new HomeDTO
             {
-                FavCars = carRepository.GetFavCars
+                FavCars = Database.Cars.GetSelectedCars
             };
             return View(homeCars);
         }
 
-        public IActionResult Car(int id) => View(carRepository.GetObjectCar(id));
+        public IActionResult Car(int id) => View(Database.Cars.Get(id));
     }
 }

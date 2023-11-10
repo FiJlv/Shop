@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Shop.DAL.Repository;
 using Shop.Data;
 using Shop.Data.FileManager;
-using Shop.Data.Interfaces;
 using Shop.Data.Repository;
 using Shop.Services;
 using Shop.ViewModels;
@@ -17,21 +17,20 @@ namespace Shop.Controllers
 {
     public class CarsController : Controller
     {
-        private readonly CarService carsManager;
-        AppDBContext appContext;
-        ICarRepository carRepository;
+        private readonly CarService carsService;
+        private AppDBContext appDBContext;
+        private UnitOfWork Database;
 
-        public CarsController(ICarRepository carRepository, ICategoryRepository categoryRepository, AppDBContext appContext)
+        public CarsController(CarService carsService, UnitOfWork database)
         {
-            carsManager = new CarService(carRepository, categoryRepository);
-            this.appContext = appContext;
-            this.carRepository = carRepository;
+            this.carsService = carsService;
+            Database = database;
         }
 
         [Route("Cars/List/{category?}")]
         public ViewResult List(string category)
         {
-            var carObj = carsManager.GetCarsListViewModel(category);
+            var carObj = carsService.GetCarsListViewModel(category);
 
             ViewBag.Title = "Page with cars";
 
@@ -41,7 +40,7 @@ namespace Shop.Controllers
         public IActionResult FavoriteCars()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var favoriteCars = carRepository.GetFavoriteCarsForUser(userId);
+            var favoriteCars = Database.Cars.GetFavoriteCarsForUser(userId);
 
             return View(favoriteCars);
         }
@@ -50,11 +49,11 @@ namespace Shop.Controllers
         public IActionResult Add(int id)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var car = appContext.Cars.Find(id);
+            var car = Database.Cars.Get(id);
 
             if (car != null)
             {
-                carRepository.AddFavoriteCarForUser(userId, car);
+                Database.Cars.AddFavoriteCarForUser(userId, car);
             }
 
             return RedirectToAction("FavoriteCars");
@@ -65,7 +64,7 @@ namespace Shop.Controllers
         {
 
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            carRepository.RemoveFavoriteCarForUser(userId, id);
+            Database.Cars.RemoveFavoriteCarForUser(userId, id);
 
             return RedirectToAction("FavoriteCars");
         }
