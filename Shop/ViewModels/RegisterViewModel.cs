@@ -2,7 +2,7 @@
 
 namespace Shop.ViewModels
 {
-    public class RegisterDTO
+    public class RegisterViewModel
     {
         [Display(Name = "Name")]
         [StringLength(30)]

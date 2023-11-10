@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Shop.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Shop.DAL.Models;
 
-namespace Shop.Data
+namespace Shop.DAL
 {
     public class AppDBContext : IdentityDbContext<User>
     {

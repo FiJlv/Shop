@@ -1,17 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
-using Shop.DAL.Repository;
-using Shop.Data.FileManager;
-using Shop.Data.Models;
-using Shop.Services;
-using Shop.ViewModels;
-using System;
-using System.Data;
-using System.IO;
+using Shop.DAL.Repository; //
+using Shop.DAL.FileManager; //
 using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
+using Shop.BLL.Services;
+using Shop.BLL.DTO;
 
 namespace Shop.Controllers
 {

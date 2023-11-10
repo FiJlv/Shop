@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using PhotoSauce.MagicScaler;
-using System.IO;
 using System.Runtime.Serialization;
-using System.Threading.Tasks;
-using System;
 
-namespace Shop.Data.FileManager
+namespace Shop.DAL.FileManager
 {
     public class FileManager : IFileManager
     {

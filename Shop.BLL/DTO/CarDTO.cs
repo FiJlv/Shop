@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Shop.Data.Models;
+using Shop.DAL.Models;
 
-namespace Shop.ViewModels
+namespace Shop.BLL.DTO
 {
     public class CarDTO
     {

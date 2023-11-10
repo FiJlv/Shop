@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Shop.DAL.Repository;
-using Shop.Data;
-using Shop.Data.Models;
+using Shop.DAL.Repository; //
+using Shop.DAL.Models; //
 using System;
-using System.Collections.Generic;
-using System.Linq;
+
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Shop.Controllers
 {

@@ -2,7 +2,7 @@
 
 namespace Shop.ViewModels
 {
-    public class LoginDTO
+    public class LoginViewModel
     {
         public string UserName { get; set; }
         [DataType(DataType.Password)]

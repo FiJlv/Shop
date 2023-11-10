@@ -1,30 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Shop.DAL.Repository;
-using Shop.Data;
-using Shop.Data.FileManager;
-using Shop.Data.Repository;
-using Shop.Services;
-using Shop.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Shop.BLL.Services;
 using System.Security.Claims;
-using System.Threading.Tasks;
-
 
 namespace Shop.Controllers
 {
     public class CarsController : Controller
     {
         private readonly CarService carsService;
-        private AppDBContext appDBContext;
-        private UnitOfWork Database;
 
-        public CarsController(CarService carsService, UnitOfWork database)
+        public CarsController(CarService carsService)
         {
             this.carsService = carsService;
-            Database = database;
         }
 
         [Route("Cars/List/{category?}")]
@@ -40,7 +26,7 @@ namespace Shop.Controllers
         public IActionResult FavoriteCars()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var favoriteCars = Database.Cars.GetFavoriteCarsForUser(userId);
+            var favoriteCars = carsService.GetFavoriteCarsForUser(userId);
 
             return View(favoriteCars);
         }
@@ -49,11 +35,11 @@ namespace Shop.Controllers
         public IActionResult Add(int id)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var car = Database.Cars.Get(id);
+            var car = carsService.Get(id);
 
             if (car != null)
             {
-                Database.Cars.AddFavoriteCarForUser(userId, car);
+                carsService.AddFavoriteCarForUser(userId, car);
             }
 
             return RedirectToAction("FavoriteCars");
@@ -64,7 +50,7 @@ namespace Shop.Controllers
         {
 
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            Database.Cars.RemoveFavoriteCarForUser(userId, id);
+            carsService.RemoveFavoriteCarForUser(userId, id);
 
             return RedirectToAction("FavoriteCars");
         }

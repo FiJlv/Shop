@@ -1,12 +1,10 @@
 ﻿using Shop.BLL.Intefaces;
 using Shop.DAL.Repository;
-using Shop.Data.FileManager;
-using Shop.Data.Models;
-using Shop.ViewModels;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Shop.DAL.FileManager;
+using Shop.DAL.Models;
+using Shop.BLL.DTO;
 
-namespace Shop.Services
+namespace Shop.BLL.Services
 {
     public class PanelService: IPanelService
     {

@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System.IO;
-using System.Threading.Tasks;
 
-namespace Shop.Data.FileManager
+namespace Shop.DAL.FileManager
 {
     public interface IFileManager
     {

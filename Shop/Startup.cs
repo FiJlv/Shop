@@ -6,17 +6,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;    
-using Shop.Data;
+using Shop.DAL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Shop.Data.Repository;
-using Shop.Data.Models;
-using Microsoft.AspNetCore.Identity;
-using Shop.Data.FileManager;
-using Shop.Services;
 using Shop.DAL.Repository;
+using Shop.DAL.Models;
+using Microsoft.AspNetCore.Identity;
+using Shop.DAL.FileManager;
+using Shop.BLL.Services;
 
 namespace Shop
 {

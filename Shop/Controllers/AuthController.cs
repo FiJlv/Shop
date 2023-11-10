@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Shop.Data.Models;
+using Shop.DAL.Models;
 using Shop.ViewModels;
 using System.Threading.Tasks;
 
@@ -24,11 +24,11 @@ namespace Shop.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View(new LoginDTO());
+            return View(new LoginViewModel());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginDTO vm)
+        public async Task<IActionResult> Login(LoginViewModel vm)
         {
             var result = await signInManager.PasswordSignInAsync(vm.UserName, vm.Password, isPersistent: false, lockoutOnFailure: false);
 
@@ -51,11 +51,11 @@ namespace Shop.Controllers
         }
         public IActionResult Register()
         {
-            return View(new RegisterDTO());
+            return View(new RegisterViewModel());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterDTO vm)
+        public async Task<IActionResult> Register(RegisterViewModel vm)
         {
             if (!ModelState.IsValid) 
             {

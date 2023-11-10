@@ -1,14 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Shop.Data.Models
+namespace Shop.DAL.Models
 {
+    //TODO: Remake cart
     public class ShopCart
     {
         public string ShopCartId { get; set; }

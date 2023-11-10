@@ -1,13 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shop.BLL.Intefaces;
-using Shop.Services;
-using Shop.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Shop.DAL.Repository;
+using Shop.BLL.DTO;
+using Shop.DAL.Repository; //
 
 namespace Shop.Controllers
 {

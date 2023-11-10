@@ -1,13 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 using Shop.DAL.Interfaces;
-using Shop.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Shop.DAL.Models;
 
-namespace Shop.Data.Repository
+namespace Shop.DAL.Repository
 {
     public class CarRepository : IRepository<Car>
     {

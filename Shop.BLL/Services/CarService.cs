@@ -1,13 +1,9 @@
 ﻿using Shop.BLL.Intefaces;
 using Shop.DAL.Repository;
-using Shop.Data.FileManager;
-using Shop.Data.Models;
-using Shop.Data.Repository;
-using Shop.ViewModels;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Shop.DAL.Models;
+using Shop.BLL.DTO;
 
-namespace Shop.Services
+namespace Shop.BLL.Services
 {
     public class CarService: ICarService
     {
@@ -37,6 +33,27 @@ namespace Shop.Services
             };
 
             return carObj;
-        }    
+        }   
+        
+        public List<Car> GetFavoriteCarsForUser(string userId)
+        {
+            return Database.Cars.GetFavoriteCarsForUser(userId);
+        }
+
+        public void AddFavoriteCarForUser(string userId, Car car)
+        {
+            Database.Cars.AddFavoriteCarForUser(userId, car);
+        }
+
+        public void RemoveFavoriteCarForUser(string userId, int carId)
+        {
+            Database.Cars.RemoveFavoriteCarForUser(userId, carId);
+        }
+
+        public Car Get(int id)
+        {
+            return Database.Cars.Get(id);
+        }
+
     }
 }
