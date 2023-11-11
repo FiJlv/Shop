@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using PhotoSauce.MagicScaler;
+using Shop.BLL.Intefaces;
 using System.Runtime.Serialization;
 
-namespace Shop.BLL.FileManager
+namespace Shop.BLL.Services
 {
-    public class FileManager : IFileManager
+    public class FileService : IFileService
     {
         private string _imagePath;
 
-        public FileManager(IConfiguration config)
+        public FileService(IConfiguration config)
         {
             _imagePath = config["Path:Images"];
 

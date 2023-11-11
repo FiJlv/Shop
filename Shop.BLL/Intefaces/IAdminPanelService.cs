@@ -3,7 +3,7 @@ using Shop.DAL.Models;
 
 namespace Shop.BLL.Intefaces
 {
-    public interface IPanelService
+    public interface IAdminPanelService
     {
         IEnumerable<Car> GetAllCars();
         CarDTO GetCarViewModel(int id);

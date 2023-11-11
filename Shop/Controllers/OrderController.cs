@@ -1,23 +1,22 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Shop.DAL.Repository; //
-using Shop.DAL.Models; //
+using Shop.DAL.Models;
 using System;
-
 using System.Threading.Tasks;
+using Shop.BLL.Services;
 
 namespace Shop.Controllers
 {
     public class OrderController : Controller
     {
-        UnitOfWork Database;
-        private readonly ShopCart shopCart;
+        private readonly ShopCartService shopCart;
         private readonly UserManager<User> userManager;
-        public OrderController(ShopCart shopCart, UserManager<User> userManager, UnitOfWork database)
+        private readonly OrderService orderService;
+        public OrderController(ShopCartService shopCart, OrderService orderService, UserManager<User> userManager)
         {
-            Database = database;
             this.shopCart = shopCart;
             this.userManager = userManager;
+            this.orderService = orderService;
         }
 
         public IActionResult Checkout()
@@ -37,7 +36,7 @@ namespace Shop.Controllers
 
             if (ModelState.IsValid)
             {
-                Database.Orders.Create(order);
+                orderService.Create(order);
                 shopCart.ClearCart();
                 return RedirectToAction("Complete");
             }

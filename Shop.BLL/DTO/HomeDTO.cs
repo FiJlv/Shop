@@ -4,6 +4,6 @@ namespace Shop.BLL.DTO
 {
     public class HomeDTO
     {
-        public IEnumerable<Car> FavCars { get; set; }
+        public IEnumerable<Car> TopSellingCars { get; set; }
     }
 }

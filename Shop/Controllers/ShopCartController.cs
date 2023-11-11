@@ -1,20 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shop.DAL.Repository; //
-using Shop.DAL.Models; //
 using System.Linq;
 using Shop.BLL.DTO;
+using Shop.BLL.Services;
 
 namespace Shop.Controllers
 {
     public class ShopCartController: Controller
     {
-        private const string MyIndex = "Index";
-        UnitOfWork Database;
-        private readonly ShopCart shopCart;
-        public ShopCartController(UnitOfWork database, ShopCart shopCart)
+        private const string myIndex = "Index";
+        private readonly ShopCartService shopCart;
+        private CarService carService;
+        public ShopCartController(CarService carService, ShopCartService shopCart)
         {
-            Database = database;
             this.shopCart = shopCart;
+            this.carService = carService;
         }
 
         public ViewResult Index()
@@ -24,7 +23,7 @@ namespace Shop.Controllers
 
             var obj = new ShopCartDTO
             {
-                ShopCart = shopCart
+                ShopCartService = shopCart
             };
 
             return View(obj);
@@ -32,18 +31,18 @@ namespace Shop.Controllers
 
         public RedirectToActionResult AddToCart(int id)
         {
-            var item = Database.Cars.GetAll().FirstOrDefault(i => i.Id == id); 
+            var item = carService.GetAllCars().FirstOrDefault(i => i.Id == id); 
             if(item != null)
             {
                 shopCart.AddToCart(item);          
             }
-            return RedirectToAction(MyIndex);
+            return RedirectToAction(myIndex);
         }
 
         public IActionResult RemoveFromCart(int id)
         {
             shopCart.RemoveFromCart(id);
-            return RedirectToAction(MyIndex);
+            return RedirectToAction(myIndex);
         }
     }
 }

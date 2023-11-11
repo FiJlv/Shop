@@ -6,11 +6,11 @@ namespace Shop.DAL.Repository
 {
     public class CategoryRepository : IRepository<Category>
     {
-        private readonly AppDBContext appDBContent;
+        private readonly AppDBContext appDBContext;
 
         public CategoryRepository(AppDBContext appDBContent)
         {
-            this.appDBContent = appDBContent;
+            this.appDBContext = appDBContent;
         }
 
         public void Create(Category item)
@@ -23,15 +23,14 @@ namespace Shop.DAL.Repository
             throw new NotImplementedException();
         }
 
-        //Remove, search by ID
         public Category GetCategoryByName(string categoryName)
         {
-            return appDBContent.Categories.FirstOrDefault(c => c.CategoryName.Equals(categoryName));
+            return appDBContext.Categories.FirstOrDefault(c => c.CategoryName.Equals(categoryName));
         }
 
         public IEnumerable<Category> GetAll()
         {
-            return appDBContent.Categories;
+            return appDBContext.Categories;
         }
 
         public void Update(Category item)

@@ -16,11 +16,11 @@ namespace Shop.Controllers
         {
             var homeCars = new HomeDTO
             {
-                FavCars = carService.GetSelectedCars()
+                TopSellingCars = carService.GetTopSellingCars()
             };
             return View(homeCars);
         }
 
-        public IActionResult Car(int id) => View(carService.Get(id));
+        public IActionResult Car(int id) => View(carService.GetCarById(id));
     }
 }

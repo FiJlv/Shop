@@ -7,11 +7,11 @@ namespace Shop.BLL.Services
 {
     public class CarService: ICarService
     {
-        UnitOfWork Database; 
+        private UnitOfWork database; 
 
         public CarService(UnitOfWork database)
         {
-            Database = database;
+            this.database = database;
         }
 
         public CarsListDTO GetCarsListViewModel(string category)
@@ -19,45 +19,49 @@ namespace Shop.BLL.Services
             category ??= string.Empty;
 
             IEnumerable<Car> cars = string.IsNullOrEmpty(category)
-                ? Database.Cars.GetAll()
-                : Database.Cars.GetCarsByCategory(category);
+                ? database.Cars.GetAll()
+                : database.Cars.GetCarsByCategory(category);
 
             var currCategory = string.IsNullOrEmpty(category)
             ? string.Empty
-                : Database.Categories.GetCategoryByName(category)?.CategoryName ?? "";
+                : database.Categories.GetCategoryByName(category)?.CategoryName ?? "";
 
             var carObj = new CarsListDTO
             {
                 AllCars = cars,
-                CurrCategory = currCategory
+                CurrentCategory = currCategory
             };
 
             return carObj;
-        }   
-        
-        public List<Car> GetFavoriteCarsForUser(string userId)
-        {
-            return Database.Cars.GetFavoriteCarsForUser(userId);
         }
 
-        public IEnumerable<Car> GetSelectedCars()
+        public IEnumerable<Car> GetAllCars()
         {
-            return Database.Cars.GetSelectedCars;
+            return database.Cars.GetAll();
+        }
+        public List<Car> GetFavoriteCarsForUser(string userId)
+        {
+            return database.Cars.GetFavoriteCarsForUser(userId);
+        }
+
+        public IEnumerable<Car> GetTopSellingCars()
+        {
+            return database.Cars.TopSellingCars;
         }
 
         public void AddFavoriteCarForUser(string userId, Car car)
         {
-            Database.Cars.AddFavoriteCarForUser(userId, car);
+            database.Cars.AddFavoriteCarForUser(userId, car);
         }
 
         public void RemoveFavoriteCarForUser(string userId, int carId)
         {
-            Database.Cars.RemoveFavoriteCarForUser(userId, carId);
+            database.Cars.RemoveFavoriteCarForUser(userId, carId);
         }
 
-        public Car Get(int id)
+        public Car GetCarById(int id)
         {
-            return Database.Cars.Get(id);
+            return database.Cars.Get(id);
         }
 
     }

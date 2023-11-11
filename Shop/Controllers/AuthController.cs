@@ -8,9 +8,9 @@ namespace Shop.Controllers
 {
     public class AuthController : Controller
     {
-        private const string Index = "Index";
-        private const string Panel = "Panel";
-        private const string Home = "Home";
+        private const string index = "Index";
+        private const string adminPanel = "AdminPanel";
+        private const string home = "Home";
 
         private readonly SignInManager<User> signInManager;
         private readonly UserManager<User> userManager;
@@ -43,10 +43,10 @@ namespace Shop.Controllers
 
             if (isAdmin)
             {
-                return RedirectToAction(Index, Panel);
+                return RedirectToAction(index, adminPanel);
             }
 
-            return RedirectToAction(Index, Home);
+            return RedirectToAction(index, home);
 
         }
         public IActionResult Register()
@@ -77,7 +77,7 @@ namespace Shop.Controllers
             {
                 await signInManager.SignInAsync(user, isPersistent: false);
 
-                return RedirectToAction(Index, Home);
+                return RedirectToAction(index, home);
             }
 
             return View(vm);
@@ -86,7 +86,7 @@ namespace Shop.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
-            return RedirectToAction(Index, Home);
+            return RedirectToAction(index, home);
         }
     }
 }

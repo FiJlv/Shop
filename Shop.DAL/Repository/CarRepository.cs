@@ -45,11 +45,9 @@ namespace Shop.DAL.Repository
             appDBContext.Cars.Remove(Get(id));
         }
 
-        //?
         public IEnumerable<Car> Cars => appDBContext.Cars.Include(c => c.Category);
 
-        //?
-        public IEnumerable<Car> GetSelectedCars => appDBContext.Cars.Where(p => p.IsFavourite).Include(c => c.Category);
+        public IEnumerable<Car> TopSellingCars => appDBContext.Cars.Where(p => p.TopSellingCars).Include(c => c.Category);
 
         public List<Car> GetFavoriteCarsForUser(string userId)
         {

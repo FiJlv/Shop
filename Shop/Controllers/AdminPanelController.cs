@@ -7,20 +7,20 @@ using Shop.BLL.DTO;
 namespace Shop.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class PanelController : Controller
+    public class AdminPanelController : Controller
     {
-        private const string MyIndex = "Index";
+        private const string myIndex = "Index";
 
-        private readonly PanelService panelService;
+        private readonly AdminPanelService adminPanelService;
 
-        public PanelController(PanelService panelService)
+        public AdminPanelController(AdminPanelService adminPanelService)
         {
-            this.panelService = panelService;
+            this.adminPanelService = adminPanelService;
         }
 
         public IActionResult Index()
         {
-            var cars = panelService.GetAllCars();
+            var cars = adminPanelService.GetAllCars();
             return View(cars);
         }
 
@@ -33,7 +33,7 @@ namespace Shop.Controllers
             }
             else
             {
-                var carViewModel = panelService.GetCarViewModel((int)id);
+                var carViewModel = adminPanelService.GetCarViewModel((int)id);
                 return View(carViewModel);
             }
         }
@@ -41,8 +41,8 @@ namespace Shop.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(CarDTO vm)
         {
-            if (await panelService.SaveCar(vm))
-                return RedirectToAction(MyIndex);
+            if (await adminPanelService.SaveCar(vm))
+                return RedirectToAction(myIndex);
             else
                 return View(vm);
         }
@@ -50,8 +50,8 @@ namespace Shop.Controllers
         [HttpGet]
         public async Task<IActionResult> Remove(int id)
         {
-            await panelService.RemoveCar(id);
-            return RedirectToAction(MyIndex);
+            await adminPanelService.RemoveCar(id);
+            return RedirectToAction(myIndex);
         }
     }
 }

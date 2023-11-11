@@ -1,7 +1,7 @@
 ﻿@model Shop.BLL.DTO.CarDTO
 
 <div>
-    <form asp-controller="Panel" asp-action="Edit" method="post" enctype="multipart/form-data" class="container">
+    <form asp-controller="AdminPanel" asp-action="Edit" method="post" enctype="multipart/form-data" class="container">
         <input asp-for="Id" type="hidden" />
         <div class="form-group">
             <label for="Name">Name</label>
@@ -20,8 +20,8 @@
             <input asp-for="Price" class="form-control" id="Price" />
         </div>
         <div class="form-check">
-            <input asp-for="IsFavourite" class="form-check-input" id="IsFavourite" />
-            <label class="form-check-label" for="IsFavourite">IsFavourite</label>
+            <input asp-for="TopSellingCars" class="form-check-input" id="TopSellingCars" />
+            <label class="form-check-label" for="TopSellingCars">TopSellingCars</label>
         </div>
         <div class="form-check">
             <input asp-for="Available" class="form-check-input" id="Available" />

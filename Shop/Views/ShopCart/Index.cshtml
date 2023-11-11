@@ -2,7 +2,7 @@
 
 <div class="container">
     
-    @foreach(var el in Model.ShopCart.ListShopItems)
+    @foreach(var el in Model.ShopCartService.ListShopItems)
     {
         <div class="alert alert-light" mt-3>
             <b>Car:</b> @el.Car.Name<br />

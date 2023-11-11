@@ -35,7 +35,7 @@ namespace Shop.Controllers
         public IActionResult Add(int id)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var car = carsService.Get(id);
+            var car = carsService.GetCarById(id);
 
             if (car != null)
             {

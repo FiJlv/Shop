@@ -6,15 +6,12 @@ namespace Shop.DAL.Repository
     public class UnitOfWork
     {
         private AppDBContext db;
-        private readonly ShopCart shopCart;
         private CarRepository carRepository;
         private CategoryRepository categoryRepository;
-        private OrdersRepository ordersRepository;
 
-        public UnitOfWork(DbContextOptions<AppDBContext> options, ShopCart shopCart)
+        public UnitOfWork(DbContextOptions<AppDBContext> options)
         {
             db = new AppDBContext(options);
-            this.shopCart = shopCart;
         }
 
         public CarRepository Cars
@@ -34,16 +31,6 @@ namespace Shop.DAL.Repository
                 if (categoryRepository == null)
                     categoryRepository = new CategoryRepository(db);
                 return categoryRepository;
-            }
-        }
-
-        public OrdersRepository Orders
-        {
-            get
-            {
-                if (ordersRepository == null)
-                    ordersRepository = new OrdersRepository(db, shopCart);
-                return ordersRepository;
             }
         }
 

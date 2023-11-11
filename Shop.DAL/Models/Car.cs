@@ -8,7 +8,7 @@
         public string LongDesc { get; set; }
         public string Image { get; set; } = "";
         public uint Price { get; set; }
-        public bool IsFavourite { get; set; }
+        public bool TopSellingCars { get; set; }
         public bool Available { get; set; }
         public int CategoryID { get; set; }
         public virtual Category Category { get; set; }

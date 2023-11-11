@@ -1,30 +1,29 @@
 ﻿using Shop.BLL.Intefaces;
 using Shop.DAL.Repository;
-using Shop.BLL.FileManager;
 using Shop.DAL.Models;
 using Shop.BLL.DTO;
 
 namespace Shop.BLL.Services
 {
-    public class PanelService: IPanelService
+    public class AdminPanelService: IAdminPanelService
     {
-        UnitOfWork Database;
-        private readonly IFileManager fileManager;
+        private UnitOfWork database;
+        private readonly IFileService fileService;
 
-        public PanelService(UnitOfWork database, IFileManager fileManager)
+        public AdminPanelService(UnitOfWork database, IFileService fileService)
         {
-            Database = database;
-            this.fileManager = fileManager;
+            this.database = database;
+            this.fileService = fileService;
         }
 
         public IEnumerable<Car> GetAllCars()
         {
-            return Database.Cars.GetAll();
+            return database.Cars.GetAll();
         }
 
         public CarDTO GetCarViewModel(int id)
         {
-            var car = Database.Cars.Get(id);
+            var car = database.Cars.Get(id);
             return new CarDTO
             {
                 Id = car.Id,
@@ -33,7 +32,7 @@ namespace Shop.BLL.Services
                 LongDesc = car.LongDesc,
                 CurrentImage = car.Image,
                 Price = car.Price,
-                IsFavourite = car.IsFavourite,
+                TopSellingCars = car.TopSellingCars,
                 Available = car.Available,
                 CategoryID = car.CategoryID
             };
@@ -48,7 +47,7 @@ namespace Shop.BLL.Services
                 ShortDesc = vm.ShortDesc,
                 LongDesc = vm.LongDesc,
                 Price = vm.Price,
-                IsFavourite = vm.IsFavourite,
+                TopSellingCars = vm.TopSellingCars,
                 Available = vm.Available,
                 CategoryID = vm.CategoryID
             };
@@ -58,23 +57,23 @@ namespace Shop.BLL.Services
             else
             {
                 if (!string.IsNullOrEmpty(vm.CurrentImage))
-                    fileManager.RemoveImage(vm.CurrentImage);
+                    fileService.RemoveImage(vm.CurrentImage);
 
-                car.Image = await fileManager.SaveImage(vm.Image);
+                car.Image = await fileService.SaveImage(vm.Image);
             }
 
             if (car.Id > 0)
-                Database.Cars.Update(car);
+                database.Cars.Update(car);
             else
-                Database.Cars.Create(car);
+                database.Cars.Create(car);
 
-            return await Database.Cars.SaveChangesAsync();
+            return await database.Cars.SaveChangesAsync();
         }
 
         public async Task RemoveCar(int id)
         {
-            Database.Cars.Delete(id);
-            await Database.Cars.SaveChangesAsync();
+            database.Cars.Delete(id);
+            await database.Cars.SaveChangesAsync();
         }
     }
 

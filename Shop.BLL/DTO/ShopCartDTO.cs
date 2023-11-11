@@ -1,9 +1,10 @@
-﻿using Shop.DAL.Models;
+﻿using Shop.BLL.Services;
+using Shop.DAL.Models;
 
 namespace Shop.BLL.DTO
 {
     public class ShopCartDTO
     {
-        public ShopCart ShopCart { get; set; }
+        public ShopCartService ShopCartService { get; set; }
     }   
 }

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Shop.BLL.FileManager
+namespace Shop.BLL.Intefaces
 {
-    public interface IFileManager
+    public interface IFileService
     {
         FileStream ImageStream(string image);
         Task<string> SaveImage(IFormFile image);

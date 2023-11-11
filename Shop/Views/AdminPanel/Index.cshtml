@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Car>
 
 <div class="container mt-5">
-    <a asp-controller="Panel" asp-action="Edit" class="btn btn-success mb-3">Add car</a>
+    <a asp-controller="AdminPanel" asp-action="Edit" class="btn btn-success mb-3">Add car</a>
 
     <ul class="list-group">
         @foreach (var car in Model)
@@ -9,10 +9,10 @@
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 @car.Name
                 <div>
-                    <a asp-controller="Panel" asp-action="Edit" class="btn btn-sm btn-success mr-2" asp-route-id="@car.Id">
+                    <a asp-controller="AdminPanel" asp-action="Edit" class="btn btn-sm btn-success mr-2" asp-route-id="@car.Id">
                         Edit
                     </a>
-                    <a asp-controller="Panel" asp-action="Remove" class="btn btn-sm btn-success" asp-route-id="@car.Id">
+                    <a asp-controller="AdminPanel" asp-action="Remove" class="btn btn-sm btn-success" asp-route-id="@car.Id">
                         Remove
                     </a>
                 </div>
