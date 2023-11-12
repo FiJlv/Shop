@@ -13,6 +13,7 @@ using Shop.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using Shop.BLL.Services;
 using Shop.BLL.Intefaces;
+using Shop.BLL.Mapping;
 
 namespace Shop
 {
@@ -47,6 +48,7 @@ namespace Shop
             services.AddScoped<CarService>();
             services.AddScoped<AdminPanelService>();
             services.AddScoped<OrderService>();
+            services.AddAutoMapper(typeof(AppMappingProfile));
 
             services.AddTransient<IFileService, FileService>();          
 

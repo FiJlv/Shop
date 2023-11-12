@@ -4,6 +4,9 @@ using Shop.DAL.Models;
 using System;
 using System.Threading.Tasks;
 using Shop.BLL.Services;
+using Shop.BLL.DTO;
+using Shop.ViewModels;
+using AutoMapper;
 
 namespace Shop.Controllers
 {
@@ -12,6 +15,7 @@ namespace Shop.Controllers
         private readonly ShopCartService shopCart;
         private readonly UserManager<User> userManager;
         private readonly OrderService orderService;
+
         public OrderController(ShopCartService shopCart, OrderService orderService, UserManager<User> userManager)
         {
             this.shopCart = shopCart;
@@ -25,8 +29,10 @@ namespace Shop.Controllers
         }
 
         [HttpPost]
-        public IActionResult Checkout(Order order)
-        {        
+        public IActionResult Checkout(OrderViewModel orderVievModel)
+        {
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<OrderViewModel, OrderDTO> ()).CreateMapper();
+            OrderDTO order = mapper.Map<OrderDTO>(orderVievModel);
             shopCart.ListShopItems = shopCart.GetShopItems();      
 
             if(shopCart.ListShopItems.Count == 0)
@@ -51,7 +57,7 @@ namespace Shop.Controllers
 
                 User user = await userManager.FindByNameAsync(name);
 
-                var order = new Order
+                var order = new OrderViewModel
                 {
                     Name = user.UserName,
                     Surname = user.Surname,

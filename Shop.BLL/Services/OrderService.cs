@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shop.BLL.DTO;
+using AutoMapper;
 
 namespace Shop.BLL.Services
 {
@@ -12,15 +14,19 @@ namespace Shop.BLL.Services
     {
         private readonly AppDBContext appDBContent;
         private readonly ShopCartService shopCart;
+        private readonly IMapper mapper;
 
-        public OrderService(AppDBContext appDBContent, ShopCartService shopCart)
+        public OrderService(AppDBContext appDBContent, ShopCartService shopCart, IMapper mapper)
         {
             this.appDBContent = appDBContent;
             this.shopCart = shopCart;
+            this.mapper = mapper;
         }
 
-        public void Create(Order order)
+        public void Create(OrderDTO orderDTO)
         {
+            Order order = mapper.Map<Order>(orderDTO);
+
             order.OrderTime = DateTime.UtcNow;
             appDBContent.Orders.Add(order);
             appDBContent.SaveChanges();
